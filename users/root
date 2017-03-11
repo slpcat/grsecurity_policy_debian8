@@ -1,0 +1,50 @@
+role root uG
+role_transitions admin shutdown
+role_allow_ip	10.0.2.251/32
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				
+	/bin				x
+	/boot				h
+	/dev				h
+	/dev/null			r
+	/dev/urandom			r
+	/etc				r
+	/etc/default			h
+	/etc/default/sysstat		r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/perl			h
+	/etc/perl/sitecustomize.pl	r
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/systemd			
+	/run/systemd/ask-password-block	r
+	/sbin				h
+	/sbin/pam-tmpdir-helper		x
+	/sys				h
+	/usr				h
+	/usr/bin			x
+	/usr/lib			rx
+	/var/backups			h
+	/var/log			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

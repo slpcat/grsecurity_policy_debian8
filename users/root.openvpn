@@ -1,0 +1,98 @@
+subject /usr/sbin/openvpn o {
+user_transition_allow nobody
+group_transition_allow nogroup
+
+    /               h
+    /bin                h
+    /bin/ip             x
+    /dev                h
+    /dev/net/tun            rw
+    /dev/null           rw
+    /dev/urandom            r
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/openvpn            rw
+    /etc/openvpn/ca.crt     r
+    /etc/openvpn/clients-conf   
+    /etc/openvpn/dh2048.pem     r
+    /etc/openvpn/openvpn-status.log w
+    /etc/openvpn/openvpn.log    a
+    /etc/openvpn/server.conf    r
+    /etc/openvpn/server.crt     r
+    /etc/openvpn/server.key     r
+    /lib                rx
+    /lib/modules            h
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /tmp                rw
+    /usr                h
+    /usr/lib            h
+    /usr/lib/x86_64-linux-gnu    rx
+    /usr/sbin           h
+    /usr/sbin/openvpn       x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    +CAP_DAC_OVERRIDE
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_NET_ADMIN
+    bind 0.0.0.0/32:0 dgram ip udp
+    bind 0.0.0.0/32:1194 dgram ip udp
+    connect disabled
+}
+subject /lib/udev/net.agent o {
+    /               h
+    /bin                h
+    /bin/dash           x
+    /bin/grep           x
+    /dev                h
+    /dev/null           rw
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /run/systemd/system     
+    /sbin               h
+    /sbin/ifup          x
+    /usr                h
+    /usr/bin/logger         
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+subject /bin/ip o {
+    /               h
+    /bin                h
+    /bin/ip             x
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /lib                rx
+    /lib/modules            h
+    /proc               
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    -CAP_ALL
+    +CAP_NET_ADMIN
+    bind    disabled
+    connect disabled
+    sock_allow_family netlink
+}

@@ -1,0 +1,355 @@
+#for systemd,systemctl,init.d,service
+subject /lib/systemd/systemd-journald o {
+    /               h
+    /dev                h
+    /dev/urandom            r
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                rw
+    /run/log/journal rwcd
+    /usr                h
+    /usr/share/zoneinfo
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_PTRACE
+    +CAP_SYS_ADMIN
+    +CAP_DAC_READ_SEARCH
+    +CAP_DAC_OVERRIDE
+    bind    disabled
+    connect disabled
+}
+subject /lib/systemd/systemd-logind o {
+    /               h
+    /dev                h
+    /dev/input          h
+    /dev/input/event4       rw
+    /dev/tty1           rw
+    /dev/tty2           rw
+    /dev/tty3           rw
+    /dev/tty4           rw
+    /dev/tty5           rw
+    /dev/tty6           rw
+    /run                h
+    /run/systemd            rwcd
+    /run/udev           rw
+    /sys                
+    /sys/devices        r  
+    -CAP_ALL
+    +CAP_SYS_TTY_CONFIG
+    bind    disabled
+    connect disabled
+}
+subject /lib/systemd/systemd-udevd o {
+	/               h
+    /etc                h
+    /etc/modprobe.d
+    /etc/systemd/network
+    /etc/udev/rules.d
+    /lib                rx
+    /lib/modules            h
+    /sys                h
+    /sys/fs/cgroup/systemd/system.slice/systemd-udevd.service/cgroup.procs  r
+    /usr                h
+    /usr/lib/systemd    rx
+    /run/udev           rwcd
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+    sock_allow_family netlink unix inet
+}
+subject /lib/systemd/systemd o {
+    /
+    /bin                rx
+    /boot               h
+    /dev
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/null           r
+    /dev/port           h
+    /dev/urandom            r
+    /etc                rx
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                rw
+    /sbin               rx
+    /sys                rwcd
+    /usr
+    /usr/bin            rx
+    /usr/lib            rx
+    /usr/local
+    /usr/share/zoneinfo     r
+    /usr/src            h
+    /usr/sbin           rx
+    /var/backups            h
+    /var/log            h
+    -CAP_ALL
+    +CAP_KILL
+    +CAP_NET_ADMIN
+    +CAP_SYS_ADMIN
+    +CAP_AUDIT_WRITE
+    +CAP_WAKE_ALARM
+    +CAP_DAC_READ_SEARCH
+    +CAP_DAC_OVERRIDE
+    bind    disabled
+    connect disabled
+}
+subject /bin/systemctl o {
+    /
+    /bin                h
+    /bin/systemctl          x
+    /bin/systemd-tty-ask-password-agent x
+    /boot               h
+    /dev                h
+    /dev/pts
+    /dev/urandom            r
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/locale.alias       r
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc
+    /proc/bus           h
+    /proc/cmdline           r
+    /proc/filesystems       r
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /run/systemd/private        rw
+    /run/systemd/system
+    /sys                h
+    /usr                h
+    /usr/lib            r
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var/backups            h
+    /var/log            h
+    -CAP_ALL
+    +CAP_NET_ADMIN
+    bind    disabled
+    connect disabled
+}
+subject /etc/init.d o {
+    /
+    /bin                xi
+    /boot               h
+    /dev                h
+    /dev/null           rw
+    /dev/random
+    /dev/tty            rw
+    /dev/urandom
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rxi
+    /lib64/modules          h
+    /opt                h
+    /opt/phpbrew/php/php-5.3.29/sbin/php-fpm
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /run                rwcd
+    /sbin               h
+    /sbin/agetty
+    /sbin/auditd
+    /sbin/start-stop-daemon     xi
+    /sys	h
+    /sys/devices/system/cpu/online  r
+    /usr                h
+    /usr/bin            rxi
+    /usr/lib            rxi
+    /usr/sbin           rxi
+    /usr/share r
+    /var
+    /var/backups            h
+    /var/cache          rwcd
+    /var/lib			rwcd
+    /var/log            w
+    /var/mail			rwcd
+    /var/spool          rwcd
+    -CAP_ALL
+    +CAP_DAC_OVERRIDE
+    +CAP_KILL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_NET_BIND_SERVICE
+    +CAP_SYS_CHROOT
+    +CAP_SYS_PTRACE
+    +CAP_SYS_NICE
+    +CAP_SYS_RESOURCE
+    +CAP_SYS_PACCT
+    bind 10.0.2.251/32:8055 stream tcp
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family netlink
+}
+subject /bin/systemd-tmpfiles o {
+	/				h
+	/bin				h
+	/bin/systemd-tmpfiles		x
+	/dev				h
+	/dev/urandom			r
+	/etc				
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/machine-id			r
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/cmdline			r
+	/proc/filesystems		r
+	/proc/sys/kernel/random/boot_id	r
+	/run				
+	/run/nscd/socket		rw
+	/run/systemd/journal/socket	rw
+	/run/tmpfiles.d			
+	/run/tmpfiles.d/kmod.conf	r
+	/tmp				
+	/usr				
+	/usr/lib			r
+	/usr/local			
+	/usr/src			h
+	/var				h
+	/var/cache			wd
+	/var/lib/systemd		
+	/var/tmp			
+	-CAP_ALL
+	+CAP_DAC_OVERRIDE
+	+CAP_FOWNER
+	+CAP_NET_ADMIN
+	bind	disabled
+	connect	disabled
+}
+subject /lib/systemd/systemd-update-utmp o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				
+	/proc/bus			h
+	/proc/cmdline			r
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/systemd/journal/socket	rw
+	/run/systemd/private		rw
+	/run/utmp			rw
+	/var				h
+	/var/log/wtmp			w
+	-CAP_ALL
+	+CAP_NET_ADMIN
+	+CAP_AUDIT_WRITE
+	bind	disabled
+	connect	disabled
+	sock_allow_family netlink
+}
+
+subject /lib/systemd/systemd-user-sessions o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/cmdline			r
+	/run				h
+	/run/nologin			wd
+	/run/systemd/journal/socket	rw
+	-CAP_ALL
+	+CAP_NET_ADMIN
+	bind	disabled
+	connect	disabled
+}
+subject /usr/sbin/service o {
+    /
+    /bin                h
+    /bin/dash           x
+    /bin/sed            x
+    /bin/systemctl          x
+    /boot               h
+    /dev                h
+    /dev/null           rw
+    /dev/tty1           rw
+    /dev/pts            rw
+    /etc                h
+    /etc/grsec2
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /run/systemd/system
+    /sys                h
+    /usr                h
+    /usr/bin/basename       x
+    /usr/sbin/service       r
+    /usr/share/zoneinfo     r
+    /var/backups            h
+    /var/log            h
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}

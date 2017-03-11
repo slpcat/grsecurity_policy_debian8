@@ -1,0 +1,48 @@
+role nobody u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /bin/ip o {
+	/				h
+	/bin				h
+	/bin/ip				x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+	sock_allow_family netlink
+}
+
+subject /usr/sbin/openvpn o {
+	/				h
+	/bin				h
+	/bin/ip				x
+	/etc				h
+	/etc/openvpn/	    rwc
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+    /usr/sbin/openvpn   rx
+	/usr/share/zoneinfo		
+	-CAP_ALL
+	bind	disabled
+    connect 0.0.0.0/32:1024-65535 icmp
+	connect 0.0.0.0/0:1024-65535 dgram udp
+}
+

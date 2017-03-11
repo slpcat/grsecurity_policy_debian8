@@ -1,0 +1,8 @@
+role sshd u
+subject /  {
+	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+

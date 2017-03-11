@@ -1,0 +1,69 @@
+subject /usr/sbin/php-fpm7.0 o {
+user_transition_allow www-data
+group_transition_allow www-data
+
+	/				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/sys/kernel/ngroups_max	r
+	/run				h
+	/run/nscd/socket		rw
+	/run/php/php7.0-fpm.pid		wc
+	/run/php/php7.0-fpm.sock	wc
+	/run/systemd/notify		rw
+	/tmp				rwcd
+	/usr				h
+	/usr/lib			rx
+	/var				h
+	/var/log/php7.0-fpm.log		a
+	-CAP_ALL
+	+CAP_CHOWN
+	+CAP_DAC_OVERRIDE
+	+CAP_SETGID
+	+CAP_SETUID
+	bind	disabled
+	connect	disabled
+}
+
+subject /usr/sbin/phpquery o {
+	/				h
+	/bin				h
+	/bin/dash			x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/root				
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/bin			h
+	/usr/bin/expr			x
+	/usr/bin/find			x
+	/usr/bin/sort			x
+	/usr/lib			h
+	/usr/lib/php			
+	/usr/lib/php/php-helper		r
+	/usr/sbin			h
+	/usr/sbin/phpquery		r
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

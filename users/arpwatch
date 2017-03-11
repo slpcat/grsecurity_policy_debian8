@@ -1,0 +1,137 @@
+role arpwatch u
+role_allow_ip   0.0.0.0/32
+subject /  {
+    /               h
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+
+subject /etc/init.d o {
+    /               h
+    /dev                h
+    /dev/null           rw
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/postfix            h
+    /etc/postfix/dynamicmaps.cf r
+    /etc/postfix/main.cf        r
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rxi
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /tmp                rwcd
+    /usr                h
+    /usr/lib            rxi
+    /usr/sbin           h
+    /usr/sbin/postdrop      xi
+    /usr/sbin/sendmail      xi
+    /usr/share          h
+    /usr/share/arpwatch/ethercodes.dat  r
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/lib/arpwatch/arp.dat   rwcd
+    /var/lib/arpwatch/arp.dat-  rwcd
+    /var/lib/arpwatch/arp.dat.new   rwcd
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    bind 0.0.0.0/32:0 dgram ip
+    connect 10.0.2.10/32:53 dgram udp
+    connect 10.0.2.26/32:53 dgram udp
+    sock_allow_family netlink
+}
+subject /usr/sbin/arpwatch oh {
+	/               h
+	/etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/postfix            h
+    /etc/postfix/dynamicmaps.cf r
+    /etc/postfix/main.cf        r
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rxi
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /tmp                rwcd
+    /usr                h
+    /usr/sbin/sendmail  x
+    /usr/lib            rxi
+    /usr/share/zoneinfo r
+	/var                h
+    /var/lib/arpwatch   rwcd
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    bind 0.0.0.0/32:0 dgram ip
+    connect 10.0.2.10/32:53 dgram udp
+    connect 10.0.2.26/32:53 dgram udp
+    sock_allow_family netlink
+}
+subject /usr/sbin/sendmail o {
+    /               h
+    /dev/null       rw
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/postdrop      x
+    /usr/sbin/sendmail      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix
+    -CAP_ALL
+    bind    127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/sbin/postdrop o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/postdrop      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix  rwcd
+    -CAP_ALL
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}

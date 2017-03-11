@@ -1,0 +1,328 @@
+subject /usr/lib/postfix/master o {
+    /               h
+    /               h
+    /usr/lib/postfix     x
+    /var/spool/postfix    rw
+    /run/systemd/journal/dev-log rw
+	/run/nscd/socket r
+    -CAP_ALL
+    +CAP_KILL
+    +CAP_DAC_READ_SEARCH
+    +CAP_DAC_OVERRIDE
+    bind    disabled
+    connect disabled
+}
+subject /usr/lib/postfix/qmgr o {
+    user_transition_allow postfix
+    group_transition_allow postfix
+    /               h
+    /etc r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib rx
+    /usr/lib rx
+    /var/spool/postfix rw
+    /proc/sys/kernel/ngroups_max    r
+    /run/systemd/journal/dev-log rw
+    /usr/share/zoneinfo r
+    /etc/postfix r
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 icmp
+    bind 0.0.0.0/32:0 dgram ip
+    connect 10.0.2.26/32:53 dgram udp
+    sock_allow_family ipv6 netlink
+}
+subject /usr/lib/postfix/pickup o {
+user_transition_allow postfix
+group_transition_allow postfix
+
+    /               h
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /proc               h
+    /proc/sys/kernel/ngroups_max    r
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    #bind 127.0.0.1/32:25 icmp 
+	bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/sbin/postconf o {
+	/				h
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/postfix			r
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/usr				h
+	/usr/lib			rx
+	/usr/sbin			h
+	/usr/sbin/postconf		x
+	-CAP_ALL
+	bind 0.0.0.0/32:0 dgram ip
+	connect 10.0.2.26/32:53 dgram udp
+}
+
+subject /usr/sbin/postdrop o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/postdrop      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix  rwcd
+    -CAP_ALL
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/sbin/postmulti o {
+	/				h
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/postfix			r
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/lib/postfix		
+	/usr/sbin			
+	/usr/sbin/postconf		x
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind 0.0.0.0/32:0 dgram ip
+	connect 10.0.2.26/32:53 dgram udp
+	sock_allow_family netlink
+}
+
+subject /usr/lib/postfix/cleanup o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /proc/sys/kernel/ngroups_max    r
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID 
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/lib/postfix/local o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/aliases            r
+    /etc/aliases.db         r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /proc/sys/kernel/ngroups_max    r
+    /sys/devices/system/cpu/online  r
+    /proc/stat          r
+    /proc/cpuinfo       r
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/tmp            rwcd
+    /var/spool/postfix      rwcd
+    /var/mail           rwcd
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/lib/postfix/bounce o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /proc/sys/kernel/ngroups_max    r
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/lib/postfix/flush o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /proc/sys/kernel/ngroups_max    r
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/lib/postfix/trivial-rewrite o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /proc/sys/kernel/ngroups_max    r
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix      rwcd
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/sbin/sendmail o {
+	/				h
+    /dev/null       rw
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/postfix			r
+	/etc/resolv.conf		r
+	/lib				rx
+	/lib/modules			h
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/lib			rx
+	/usr/sbin			h
+	/usr/sbin/postdrop		x
+	/usr/sbin/sendmail		x
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/spool/postfix		
+	-CAP_ALL
+	bind	127.0.0.1/32:25 stream tcp
+	connect	disabled
+	sock_allow_family ipv6 netlink
+}

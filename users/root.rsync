@@ -1,0 +1,24 @@
+subject /usr/bin/rsync o {
+user_transition_allow www-data
+group_transition_allow www-data
+
+	/				h
+	/data				h
+	/data/web			
+	/etc				h
+	/etc/rsyncd.conf		r
+	/etc/rsyncd.secrets		r
+	/run				h
+	/run/nscd/socket		rw
+	/run/rsyncd.lock		rwc
+	/usr				h
+	/usr/share/zoneinfo		
+	/var				h
+	/var/log/rsyncd.log		a
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_SYS_CHROOT
+	bind 10.0.2.69/32:873 stream tcp
+	connect	disabled
+}

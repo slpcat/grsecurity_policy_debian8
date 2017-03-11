@@ -1,0 +1,47 @@
+subject /usr/sbin/apache2 o {
+user_transition_allow www-data
+group_transition_allow www-data
+
+    /               
+    /boot               h
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/port           h
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib/modules            h
+    /lib/x86_64-linux-gnu   rx
+    /lib64/modules          h
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys/kernel/ngroups_max    r
+    /run/apache2/apache2.pid    wd
+    /run/nscd/socket rw
+    /sys                h
+    /usr/sbin/apache2       rx
+    /sbin/killall5      rx
+    /usr/src            h
+    /var                
+    /var/backups            h
+    /var/log            h
+    /var/www            r
+    -CAP_ALL
+    +CAP_KILL
+    +CAP_SETGID
+    +CAP_SETUID
+    bind    disabled
+    connect disabled
+    sock_allow_family ipv6 unix inet
+}

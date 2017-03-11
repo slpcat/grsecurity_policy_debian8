@@ -1,0 +1,37 @@
+subject /usr/bin/dbus-daemon o {
+user_transition_allow messagebus nobody
+group_transition_allow messagebus nogroup
+
+	/				h
+	/dev				h
+	/dev/urandom			r
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				h
+	/run/systemd/system		
+	/usr				h
+	/usr/bin/dbus-daemon		x
+	/usr/lib/x86_64-linux-gnu/libcap-ng.so.0.0.0	rx
+	/usr/share/dbus-1/system-services	r
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_SYS_RESOURCE
+	bind	disabled
+	connect	disabled
+}

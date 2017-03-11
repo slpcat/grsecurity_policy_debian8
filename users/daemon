@@ -1,0 +1,167 @@
+role daemon u
+role_allow_ip   0.0.0.0/32
+subject /  {
+    /               h
+    /bin/dash           x
+    /sbin/pam-tmpdir-helper     x
+    /usr/sbin
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+
+subject /bin/dash o {
+    /               h
+    /bin                h
+    /bin/dash           x
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/bin/debsecan       x
+    /usr/sbin
+    /usr/sbin/sendmail      x
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+subject /sbin/pam-tmpdir-helper o {
+    /
+    /boot               h
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/port           h
+    /etc
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /sbin               h
+    /sbin/pam-tmpdir-helper     x
+    /sys                h
+    /tmp                wc
+    /usr/src            h
+    /var/backups            h
+    /var/log            h
+    -CAP_ALL
+    +CAP_CHOWN
+    bind    disabled
+    connect disabled
+}
+subject /usr/bin/debsecan o {
+    /               h
+    /bin                h
+    /bin/dash           x
+    /dev                h
+    /dev/urandom            r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /proc               h
+    /proc/meminfo           r
+    /run                h
+    /run/nscd/socket        rw
+    /usr
+    /usr/bin            rx
+    /usr/lib            rx
+    /usr/local          h
+    /usr/local/lib/python2.7/dist-packages
+    /usr/share          h
+    /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt   r
+    /usr/share/zoneinfo     r
+    /usr/src            h
+    /var                h
+    /var/lib/debsecan/history   rwcd
+    /var/lib/debsecan/history.new   rwcd
+    /var/lib/dpkg/status        r
+    -CAP_ALL
+    bind 0.0.0.0/32:0 dgram ip
+    connect 10.0.2.26/32:53 dgram udp
+    connect 128.31.0.67/32:443 stream tcp
+}
+subject /usr/sbin/postdrop o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/postdrop      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix  rwcd
+    -CAP_ALL
+    bind 127.0.0.1/32:25 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}
+subject /usr/sbin/sendmail o {
+    /               h
+    /dev/null       rw
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            h
+    /etc/postfix/dynamicmaps.cf r
+    /etc/postfix/main.cf        r
+    /etc/resolv.conf        r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/postdrop      x
+    /usr/sbin/sendmail      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/spool/postfix
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+    sock_allow_family netlink
+}
+

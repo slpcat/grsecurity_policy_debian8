@@ -1,0 +1,648 @@
+#all cron tasks for role root
+subject /usr/sbin/cron o {
+user_transition_allow root daemon
+group_transition_allow root daemon
+
+	/				
+	/bin				h
+	/bin/dash			x
+	/boot				h
+	/dev/grsec			h
+	/dev/kmem			h
+	/dev/mem			h
+	/dev/port			h
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				rw
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys/kernel/ngroups_max	r
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/run/utmp			r
+	/sbin				h
+	/sbin/pam-tmpdir-helper		x
+	/sys				h
+	/tmp				rwcd
+	/usr				h
+	/usr/lib			rx
+	/usr/sbin/sendmail	x
+	/usr/share/zoneinfo		
+	/var				h
+	/var/spool/cron/crontabs	
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_SYS_RESOURCE
+	+CAP_AUDIT_WRITE
+	bind	disabled
+	connect	disabled
+	sock_allow_family netlink
+}
+subject /usr/sbin/cron-apt o {
+	/				h
+	/bin				x
+	/dev				h
+	/dev/null			w
+	/dev/urandom			
+	/etc				h
+	/etc/cron-apt/action.d		
+	/etc/cron-apt/config		r
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/root				
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/tmp				rwc
+	/usr				h
+	/usr/bin			x
+	/usr/sbin			h
+	/usr/sbin/cron-apt		r
+	/usr/share			h
+	/usr/share/cron-apt/functions	r
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/lib/cron-apt	rwcd	
+	/var/log/cron-apt/log		a
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /bin/cp o {
+	/				h
+	/bin				h
+	/bin/cp				x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/filesystems		r
+	/tmp				rwc
+	/usr				h
+	/usr/lib/locale/locale-archive	r
+	/var				h
+	/var/backups			h
+	/var/backups/apt.extended_states	wc
+	/var/lib			h
+	/var/lib/apt/extended_states	r
+	/var/lib/cron-apt	rwc
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /bin/dash o {
+	/				
+	/bin				h
+	/bin/dash			x
+	/bin/run-parts			x
+	/boot				h
+	/dev				h
+	/dev/null			w
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/lib64/modules			h
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/sys				h
+	/usr				h
+	/usr/bin			h
+	/usr/bin/apt-show-versions	x
+	/usr/lib			x
+	/usr/sbin			h
+	/usr/sbin/cron-apt		x
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var/backups			h
+	/var/log			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /bin/mkdir o {
+	/				h
+	/bin				h
+	/bin/mkdir			x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/filesystems		r
+	/var				
+	/var/backups			h
+	/var/lib			
+	/var/lib/cron-apt	wc		
+	/var/log			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /bin/touch o {
+	/				h
+	/bin				h
+	/bin/touch			x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/tmp				wc
+	/var				h
+	/var/log/cron-apt/log		wc
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /usr/bin/dotlockfile o {
+group_transition_allow root
+
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/run				h
+	/run/nscd/socket		rw
+	/usr				h
+	/usr/bin/dotlockfile		x
+	/var				h
+	/var/lib/cron-apt		wcdl
+	-CAP_ALL
+	+CAP_SETGID
+	bind	disabled
+	connect	disabled
+}
+subject /etc/cron.hourly o {
+user_transition_allow man
+group_transition_allow man
+
+	/				
+	/bin				rxi
+	/boot				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				rxi
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rxi
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				rw
+	/sbin				h
+	/sbin/start-stop-daemon		xi
+	/sys				h
+	/usr				h
+	/usr/bin			rxi
+	/usr/lib			rxi
+	/usr/sbin			rxi
+	/usr/share			r
+	/var				h
+	/var/backups			rwcd
+	/var/cache			h
+	/var/cache/apt			w
+	/var/cache/apt/pkgcache.bin	r
+	/var/cache/apt-show-versions	h
+	/var/cache/apt-show-versions/apackages-multiarch	wcd
+	/var/cache/apt-show-versions/files	wcd
+	/var/cache/apt-show-versions/ipackages-multiarch	wcd
+	/var/cache/man			
+	/var/lib			rwcd
+	/var/log			rwcdl
+	-CAP_ALL
+	+CAP_CHOWN
+	+CAP_DAC_OVERRIDE
+	+CAP_FOWNER
+	+CAP_FSETID
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_NET_ADMIN
+	bind	disabled
+	connect	disabled
+}
+subject /etc/cron.daily o {
+user_transition_allow man
+group_transition_allow man
+
+	/				
+	/bin				rxi
+	/boot				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				rxi
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rxi
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				rw
+	/sbin				h
+	/sbin/start-stop-daemon		xi
+	/sys				h
+	/usr				h
+	/usr/bin			rxi
+	/usr/lib			rxi
+	/usr/sbin			rxi
+	/usr/share			r
+	/var				h
+	/var/backups			rwcd
+	/var/cache			h
+	/var/cache/apt			w
+	/var/cache/apt/pkgcache.bin	r
+	/var/cache/apt-show-versions	h
+	/var/cache/apt-show-versions/apackages-multiarch	wcd
+	/var/cache/apt-show-versions/files	wcd
+	/var/cache/apt-show-versions/ipackages-multiarch	wcd
+	/var/cache/man			
+	/var/lib			rwcd
+	/var/log			rwcdl
+	-CAP_ALL
+	+CAP_CHOWN
+	+CAP_DAC_OVERRIDE
+	+CAP_FOWNER
+	+CAP_FSETID
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_NET_ADMIN
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/cron.monthly o {
+	/				
+	/bin				xi
+	/boot				h
+	/dev/grsec			h
+	/dev/kmem			h
+	/dev/mem			h
+	/dev/port			h
+	/etc				r
+	/etc/cron.daily			h
+	/etc/cron.daily/logrotate	
+	/etc/cron.monthly		h
+	/etc/cron.monthly/acct		r
+	/etc/cron.monthly/debsums	r
+	/etc/default			h
+	/etc/default/debsums		r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rxi
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		h
+	/lib/x86_64-linux-gnu/ld-2.19.so	xi
+	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libpthread-2.19.so	rxi
+	/lib64/modules			h
+	/proc				h
+	/proc/meminfo			r
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/sys				h
+	/usr				h
+	/usr/bin			xi
+	/usr/lib			h
+	/usr/lib/locale/locale-archive	r
+	/usr/sbin			h
+	/usr/sbin/accton	x	
+	/usr/sbin/logrotate	x	
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/log/wtmp.1			r
+	/var/log/wtmp.report		wc
+	-CAP_ALL
+	+CAP_CHOWN
+	+CAP_FSETID
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/cron.weekly o {
+user_transition_allow man
+group_transition_allow man
+
+	/				
+	/bin				h
+	/bin/dash			xi
+	/bin/egrep			rxi
+	/bin/grep			xi
+	/boot				h
+	/dev				h
+	/dev/null			r
+	/etc				r
+	/etc/cron.weekly		h
+	/etc/cron.weekly/debsums	r
+	/etc/cron.weekly/man-db		r
+	/etc/default			h
+	/etc/default/debsums		r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rxi
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		h
+	/lib/x86_64-linux-gnu/ld-2.19.so	xi
+	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libpcre.so.3.13.1	rxi
+	/lib/x86_64-linux-gnu/libpthread-2.19.so	rxi
+	/lib64/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/sbin				h
+	/sbin/start-stop-daemon		xi
+	/sys				h
+	/usr				h
+	/usr/bin			h
+	/usr/bin/debsums		
+	/usr/bin/mandb			
+	/usr/lib			h
+	/usr/lib/locale/locale-archive	r
+	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/cache/man			
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	bind	disabled
+	connect	disabled
+}
+subject /usr/lib/php5/sessionclean o {
+    /               h
+    /bin                h
+    /bin/dash           x
+    /bin/sed            x
+    /dev                h
+    /dev/null           rw
+    /dev/pts
+    /etc                r
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /proc
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /root
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /sbin               h
+    /sbin/killall5          x
+    /usr                h
+    /usr/bin            h
+    /usr/bin/find           x
+    /usr/bin/php5           x
+    /usr/bin/sort           x
+    /usr/lib            h
+    /usr/lib/php5/sessionclean  rx
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/lib/php5/sessions
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+    sock_allow_family unix inet
+}
+subject /usr/sbin/accton o {
+    /               h
+    /bin                h
+    /dev                h
+    /dev/null           rw
+    /dev/pts
+    /etc                r
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /proc
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /root
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /sbin               h
+    /usr                h
+    /usr/bin            h
+    /usr/lib            h
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var                h
+    -CAP_ALL
+    +CAP_SYS_PACCT
+    bind    disabled
+    connect disabled
+}
+    
+subject /usr/bin/php5 o {
+    /               h
+    /dev                h
+    /dev/urandom            r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /usr
+    /usr/bin
+    /usr/bin/php5           rx
+    /usr/lib            rx
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /usr/src            h
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+    sock_allow_family unix inet
+}
+subject /usr/bin/find o {
+    /               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/locale.alias       r
+    /lib                rx
+    /lib/modules            h
+    /lib/x86_64-linux-gnu       rx
+    /root               
+    /proc               r
+    /usr                h
+    /usr/bin/find           x
+    /usr/lib/ rx
+    /var                h
+    /var/lib/php/sessions    rwd   
+    /var/lib/php5/sessions   rwd
+    -CAP_ALL
+    +CAP_DAC_READ_SEARCH
+    +CAP_SYS_PTRACE
+    +CAP_DAC_OVERRIDE
+    bind    disabled
+    connect disabled
+}
+subject /bin/run-parts o {
+	/				h
+	/bin				h
+	/bin/run-parts			x
+	/etc				rx
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /sbin/killall5 o {
+    /               h
+    /bin                h
+    /bin/dash
+    /bin/journalctl
+    /bin/zsh5
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /lib                rx
+    /lib/modules            h
+    /opt                h
+    /opt/phpbrew/php/php-5.3.29/sbin/php-fpm
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /sbin               h
+    /sbin/agetty
+    /sbin/auditd
+    /sbin/killall5          rx
+    /usr                h
+    /usr/bin            h
+    /usr/bin/dbus-daemon
+    /usr/bin/sort
+    /usr/bin/sudo
+    /usr/lib            h
+    /usr/lib/postfix/master
+    /usr/lib/postfix/pickup
+    /usr/lib/postfix/qmgr
+    /usr/sbin
+    -CAP_ALL
+	+CAP_DAC_READ_SEARCH
+	+CAP_DAC_OVERRIDE
+    bind    disabled
+    connect disabled
+    sock_allow_family unix inet
+}
+

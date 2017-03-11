@@ -1,0 +1,19 @@
+subject /usr/sbin/smartd o {
+	/				h
+	/dev				
+	/dev/grsec			h
+	/dev/kmem			h
+	/dev/mem			h
+	/dev/port			h
+	/etc				h
+	/etc/smartd.conf		r
+	/proc				h
+	/proc/devices			r
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

@@ -1,0 +1,37 @@
+subject /usr/sbin/zabbix_agentd o {
+user_transition_allow zabbix
+group_transition_allow zabbix
+
+    /               h
+    /dev                h
+    /dev/urandom            r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /etc/zabbix         
+    /etc/zabbix/zabbix_agentd.conf  r
+    /etc/zabbix/zabbix_agentd.d 
+    /etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf    r
+    /lib                rx
+    /lib/modules            h
+    /proc               h
+    /proc/sys/kernel/ngroups_max    r
+    /run                h
+    /run/nscd/socket        rw
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/zabbix_agentd     x
+    -CAP_ALL
+    +CAP_SETGID
+    +CAP_SETUID
+    bind    disabled
+    connect disabled
+}

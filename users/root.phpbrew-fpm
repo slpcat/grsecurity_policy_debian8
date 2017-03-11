@@ -1,0 +1,44 @@
+subject /opt/phpbrew/php/php-5.3.29/sbin/php-fpm o {
+user_transition_allow www-data
+group_transition_allow www-data
+
+    /               h
+    /dev                h
+    /dev/null           rw
+    /dev/urandom            r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /etc/ssl            h
+    /etc/ssl/openssl.cnf        r
+    /lib                rx
+    /lib/modules            h
+    /opt
+    /opt/phpbrew
+    /opt/phpbrew/php
+    /opt/phpbrew/php/php-5.3.29 a
+    /opt/phpbrew/php/php-5.3.29/etc r
+    /opt/phpbrew/php/php-5.3.29/sbin    x
+    /proc               h
+    /proc/sys/kernel/ngroups_max    r
+    /run                h
+    /run/nscd/socket        rw
+    /run/php-fpm.sock       wcd
+    /usr                h
+    /usr/lib            rx
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    +CAP_CHOWN
+    +CAP_KILL
+    +CAP_SETGID
+    +CAP_SETUID
+    bind    disabled
+    connect disabled
+}

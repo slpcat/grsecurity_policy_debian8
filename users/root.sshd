@@ -1,0 +1,56 @@
+subject /usr/sbin/sshd oh {
+group_transition_allow root hmuser nogroup
+    /                   r
+    /bin                h
+    /bin/zsh5
+    /boot               h
+    /dev                h
+    /dev/null           rw
+    /dev/ptmx           rw
+    /dev/pts            rw
+    /dev/urandom            r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow-            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc               rw
+    /proc/bus           h
+    /proc/filesystems       r
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys/kernel/ngroups_max    r
+    /run                h
+    /run/nscd/socket        rw
+    /run/sshd       rwcd
+    /run/sshd.pid   cwd
+    /run/systemd/journal/dev-log    rw
+    /run/utmp           rw
+    /sys                h
+    /usr                h
+    /usr/lib
+    /usr/lib/x86_64-linux-gnu   rx
+    /usr/sbin/sshd          x
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/log/lastlog        rw
+    /var/log/wtmp           w
+    -CAP_ALL
+    +CAP_CHOWN
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_CHROOT
+    +CAP_SYS_RESOURCE
+    +CAP_AUDIT_WRITE
+    +CAP_NET_BIND_SERVICE
+    bind 10.0.2.251/32:22 stream tcp
+    connect disabled
+    sock_allow_family ipv6 netlink
+}

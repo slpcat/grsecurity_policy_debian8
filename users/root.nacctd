@@ -1,0 +1,24 @@
+subject /usr/sbin/nacctd oh {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/nsswitch.conf		r
+	/etc/protocols			r
+	/lib				
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		
+	/lib/x86_64-linux-gnu/libnss_files-2.19.so	rx
+	/run				h
+	/run/nacctd.pid			wc
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/lib			
+	/var				h
+	/var/log/net-acct/dump		wc
+	/var/log/net-acct/net-acct.debug	a
+	/var/log/net-acct/net-acct.log	a
+	-CAP_ALL
+	+CAP_NET_RAW
+	bind	disabled
+	connect	disabled
+}

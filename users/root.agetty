@@ -1,0 +1,41 @@
+subject /sbin/agetty o {
+    /               h
+    /bin                h
+    /bin/login          x
+    /dev                h
+    /dev/null           rw
+    /dev/tty1           rw
+    /dev/pts            rw
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/locale.alias       r
+    /lib                rx
+    /lib/modules            h
+    /proc               
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                h
+    /run/linuxlogo/issue.linuxlogo  r
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /run/utmp           rw
+    /sbin               h
+    /sbin/agetty            x
+    /usr                h
+    /usr/lib/locale    r
+    /usr/lib/x86_64-linux-gnu rx
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/log/wtmp           w
+    -CAP_ALL
+    +CAP_FSETID
+    +CAP_SYS_ADMIN
+    +CAP_SYS_TTY_CONFIG
+    bind    disabled
+    connect disabled
+}

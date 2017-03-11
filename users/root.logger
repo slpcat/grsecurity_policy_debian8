@@ -1,0 +1,17 @@
+subject /usr/bin/logger o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/tmp				r
+	/usr				h
+	/usr/bin/logger			x
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

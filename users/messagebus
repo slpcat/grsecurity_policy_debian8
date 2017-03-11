@@ -1,0 +1,17 @@
+role messagebus u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /usr/bin/dbus-daemon o {
+	/				h
+	/run/systemd/seats		
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+	sock_allow_family netlink
+}

@@ -1,0 +1,23 @@
+role mysql u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /usr/sbin/mysqld o {
+    /               h
+	/etc		r
+    /run                h
+    /run/mysqld/mysqld.pid      rcwd
+    /run/mysqld/mysqld.sock     rcwd
+    /tmp                rwcd
+    /var                rx
+    /var/lib/mysql/    rwcd
+    -CAP_ALL
+    bind 127.0.0.1/32:3306 stream tcp
+    connect disabled
+}
+

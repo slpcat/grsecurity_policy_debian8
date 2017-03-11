@@ -1,0 +1,20 @@
+role systemd-timesync u
+role_allow_ip   0.0.0.0/32
+subject /  {
+    /               h
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+
+subject /lib/systemd/systemd-timesyncd o {
+    /               h
+    /etc/resolv.conf        r
+    /run/systemd/notify     rw
+    /var/lib/systemd/clock      w
+    -CAP_ALL
+    +CAP_SYS_TIME
+    bind 0.0.0.0/32:0 dgram ip udp
+    connect 10.0.2.26/32:123 dgram udp
+    sock_allow_family netlink
+}

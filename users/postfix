@@ -1,0 +1,19 @@
+role postfix u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	/var/spool/postfix		rwcd
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/init.d o {
+	/				h
+	/var				h
+	/var/spool			rwcd
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+

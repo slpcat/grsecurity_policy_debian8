@@ -1,0 +1,9 @@
+subject /usr/sbin/haveged oh {
+	/				h
+	/dev/random			rw
+	/proc/sys/kernel/random/write_wakeup_threshold	w
+	-CAP_ALL
+	+CAP_SYS_ADMIN
+	bind	disabled
+	connect	disabled
+}

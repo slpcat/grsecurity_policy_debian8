@@ -1,0 +1,48 @@
+subject /usr/sbin/rsyslogd o {
+    /
+    /boot               h
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/log            h
+    /dev/mem            h
+    /dev/port           h
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc               h
+    /proc/kmsg          r
+    /proc/sys/vm/overcommit_memory  r
+    /run                h
+    /run/rsyslogd.pid       rwc
+    /run/systemd/journal/syslog
+    /run/systemd/notify     rw
+    /run/systemd/system
+    /run/nscd/socket	rw
+    /sys                h
+    /usr                h
+    /usr/lib            rx
+    /usr/sbin           h
+    /usr/sbin/rsyslogd      x
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    /var
+    /var/backups            h
+    /var/log            wc
+    /var/spool/postfix/dev/log  wc
+    -CAP_ALL
+    +CAP_CHOWN
+    +CAP_SYS_NICE
+    +CAP_SYSLOG
+    bind 0.0.0.0/32:0 dgram ip
+    connect 10.0.2.26/32:53 dgram udp
+}
+

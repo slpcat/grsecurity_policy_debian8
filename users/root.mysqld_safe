@@ -1,0 +1,63 @@
+subject /usr/bin/mysqld_safe o {
+    /               w
+    /bin                h
+    /bin/date           x
+    /boot               h
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/port           h
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib            rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /sys                h
+    /usr                r
+    /usr/lib            rx
+    /usr/bin/mysqld_safe        rx
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/lib/mysql      rwcd
+    /var/log/mysql      w
+    -CAP_ALL
+    +CAP_DAC_OVERRIDE
+    +CAP_DAC_READ_SEARCH
+    bind    disabled
+    connect disabled
+    sock_allow_family all
+}
+subject /bin/date o {
+    /               h
+    /bin                h
+    /bin/date           rx
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/locale.alias       r
+    /lib                rx
+    /lib/modules            h
+    /usr                h
+    /usr/lib            r
+    /usr/share          h
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+    sock_allow_family unix inet
+}

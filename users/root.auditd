@@ -1,0 +1,8 @@
+subject /sbin/auditd oh {
+	/				h
+	/var/log/audit/audit.log	rwcd
+	/var/log/audit/audit.log.1	rwc
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

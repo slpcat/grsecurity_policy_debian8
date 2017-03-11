@@ -1,0 +1,106 @@
+role www-data u
+role_allow_ip	10.0.2.251/32
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	/etc/ld.so.cache		r
+	/lib/x86_64-linux-gnu/libgcc_s.so.1	rx
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/init.d o {
+	/				h
+	/etc/ld.so.cache		r
+	/lib/x86_64-linux-gnu/libgcc_s.so.1	rxi
+	/run/php-fpm.sock		rw
+	/srv/whizoom_web		r
+    /var/www            r
+	-CAP_ALL
+	bind 10.0.2.251/32:8055 stream tcp
+    connect 127.0.0.1/32:3306 stream tcp
+    sock_allow_family ipv6
+}
+
+subject /opt/phpbrew/php/php-5.3.29/sbin/php-fpm o {
+	/				h
+    /boot           h
+	/etc/grsec2	    h		
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow-            h
+	/etc/resolv.conf		r
+	/srv				rcwd
+    /usr                h
+	-CAP_ALL
+	bind	disabled
+	connect 127.0.0.1/32:3306 stream tcp
+	sock_allow_family ipv6
+}
+subject /usr/sbin/nginx o {
+	/				h
+	/etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow-            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+	/usr                h
+    /usr/lib			rx
+    /usr/sbin/nginx          x
+    /usr/share/zoneinfo     r
+	/var/run/php-fpm.sock	rw
+	/srv/whizoom_web		r
+	/var/log/nginx/access.log	a
+	/var/log/nginx/error.log	a
+	-CAP_ALL
+	bind 10.0.2.251/32:8055 stream tcp
+	connect	disabled
+}
+subject /usr/sbin/apache2 o {
+    /               
+    /boot               h
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/port           h
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib/modules            h
+    /lib64/modules          h
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run/nscd/socket    rw
+    /sys                h
+    /usr/lib            rx
+    /usr/sbin/apache2       rx
+    /usr/src            h
+    /var                
+    /var/backups            h
+    /var/log            h
+    /var/www            r
+    -CAP_ALL
+    bind 10.0.2.251/32:80 stream tcp
+    connect 127.0.0.1/32:3306 stream tcp
+    sock_allow_family ipv6
+}

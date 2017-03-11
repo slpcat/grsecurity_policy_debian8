@@ -1,0 +1,78 @@
+subject /usr/bin/sudo oh {
+user_transition_allow root nobody
+group_transition_allow nogroup hmuser root
+
+	/				h
+	/bin				h
+	/bin/zsh5			
+	/dev				h
+	/dev/console			
+	/dev/pts			
+	/dev/tty			rw
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/usr				h
+	/usr/bin			h
+	/usr/bin/sudo			x
+	/usr/lib			rx
+	/usr/sbin			h
+	/usr/sbin/sendmail		x
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/lib/sudo/lectured		
+	/var/lib/sudo/ts		
+	/var/lib/sudo/ts/hmuser		rw
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	+CAP_AUDIT_WRITE
+	bind	disabled
+	connect	disabled
+	sock_allow_family netlink
+}
+
+subject /usr/sbin/sshd o {
+user_transition_allow root nobody
+
+	/				h
+	/bin				h
+	/bin/zsh5			x
+	/dev				h
+	/dev/pts			rw
+	/dev/tty			rw
+	/home				h
+	/home/hmuser			
+	/proc				
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/sbin				h
+	/sbin/pam-tmpdir-helper		x
+	-CAP_ALL
+	+CAP_SETUID
+	bind	disabled
+	connect	disabled
+}

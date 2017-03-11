@@ -1,0 +1,81 @@
+role man u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/cron.daily o {
+	/				h
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rxi
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		h
+	/lib/x86_64-linux-gnu/ld-2.19.so	xi
+	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libz.so.1.2.8	rxi
+	/proc				h
+	/proc/meminfo			r
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/usr				
+	/usr/bin			h
+	/usr/bin/mandb			xi
+	/usr/lib			rxi
+	/usr/local			
+	/usr/local/share		
+	/usr/share			r
+	/usr/src			h
+	/var				h
+	/var/cache/man			rwcd
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /etc/cron.weekly o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/locale.alias		r
+	/etc/manpath.config		r
+	/lib				rxi
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		h
+	/lib/x86_64-linux-gnu/ld-2.19.so	xi
+	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
+	/lib/x86_64-linux-gnu/libz.so.1.2.8	rxi
+	/proc				h
+	/proc/meminfo			r
+	/run				h
+	/run/nscd/socket		rw
+	/run/systemd/journal/dev-log	rw
+	/usr				
+	/usr/bin			h
+	/usr/bin/mandb			xi
+	/usr/lib			rxi
+	/usr/local			
+	/usr/local/share		
+	/usr/share			r
+	/usr/src			h
+	/var				h
+	/var/cache/man			rwcd
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
