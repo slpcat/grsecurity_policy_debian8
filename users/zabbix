@@ -8,26 +8,36 @@ subject /  {
 }
 
 subject /usr/sbin/zabbix_agentd o {
-    /
+    /               
+    /bin                h
+    /bin/dash           x
     /boot               h
     /dev                h
     /dev/null           r
     /dev/urandom            r
     /etc                h
-    /etc/zabbix/zabbix_agentd.conf
-    /lib/modules            h
+    /etc/passwd         r
+    /etc/zabbix/zabbix_agentd.conf  
+    /lib                h
+    /lib64              h
     /lib64/modules          h
-    /proc               h
-    /proc/stat          r
+    /proc               r
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
     /run                h
     /run/zabbix/zabbix_agentd.pid   wc
     /sys                h
-    /sys/devices/system/cpu
+    /sys/devices/system/cpu     
+    /sys/devices/system/cpu/online  r
     /usr                h
+    /usr/sbin/zabbix_agentd     rx
     /usr/share/zoneinfo     r
     /var                h
     /var/log/zabbix/zabbix_agentd.log   ra
     -CAP_ALL
-    bind 10.0.2.251/32:10050 stream tcp
+    bind 10.0.2.137/32:10050 stream icmp tcp
     connect disabled
 }
