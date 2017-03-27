@@ -3,6 +3,10 @@ subject /lib/systemd/systemd-journald o {
     /               h
     /dev                h
     /dev/urandom            r
+    /etc				h
+    /etc/localtime		r
+		/etc/ld.so.cache		r
+		/etc/ld.so.preload		r
     /proc               r
     /proc/bus           h
     /proc/kallsyms          h
@@ -168,6 +172,7 @@ subject /etc/init.d o {
     /dev/tty            rw
     /dev/urandom
     /etc                r
+    /etc/init.d					rx
     /etc/grsec2         h
     /etc/gshadow            h
     /etc/gshadow-           h
@@ -180,8 +185,8 @@ subject /etc/init.d o {
     /lib                rxi
     /lib64/modules          h
     /opt                h
-    /opt/phpbrew/php/php-5.3.29/sbin/php-fpm
-    /proc               r
+    /opt/phpbrew
+    /proc               rw
     /proc/bus           h
     /proc/kallsyms          h
     /proc/kcore         h
@@ -192,8 +197,7 @@ subject /etc/init.d o {
     /sbin/agetty
     /sbin/auditd
     /sbin/start-stop-daemon     xi
-    /sys	h
-    /sys/devices/system/cpu/online  r
+    /sys	rw
     /usr                h
     /usr/bin            rxi
     /usr/lib            rxi
@@ -211,6 +215,7 @@ subject /etc/init.d o {
     +CAP_KILL
     +CAP_SETGID
     +CAP_SETUID
+    +CAP_SETPCAP
     +CAP_NET_BIND_SERVICE
     +CAP_SYS_CHROOT
     +CAP_SYS_PTRACE
@@ -316,19 +321,20 @@ subject /lib/systemd/systemd-user-sessions o {
 }
 subject /usr/sbin/service o {
     /
-    /bin                h
-    /bin/dash           x
-    /bin/sed            x
-    /bin/systemctl          x
+    /bin                rx
     /boot               h
     /dev                h
     /dev/null           rw
     /dev/tty1           rw
     /dev/pts            rw
-    /etc                h
-    /etc/grsec2
-    /etc/ld.so.cache        r
-    /etc/ld.so.preload      r
+    /etc				r
+		/etc/grsec2			h
+		/etc/gshadow			h
+		/etc/gshadow-			h
+		/etc/ppp			h
+		/etc/samba/smbpasswd		h
+		/etc/shadow-			h
+		/etc/ssh			h
     /lib                rx
     /lib/modules            h
     /lib64/modules          h
@@ -344,8 +350,8 @@ subject /usr/sbin/service o {
     /run/systemd/system
     /sys                h
     /usr                h
-    /usr/bin/basename       x
-    /usr/sbin/service       r
+    /usr/bin       rx
+    /usr/sbin       rx
     /usr/share/zoneinfo     r
     /var/backups            h
     /var/log            h

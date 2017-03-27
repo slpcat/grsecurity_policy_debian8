@@ -116,6 +116,7 @@ subject /bin/dash o {
 	/dev				h
 	/dev/null			w
 	/etc				h
+	/etc/localtime      r
 	/etc/ld.so.cache		r
 	/etc/ld.so.preload		r
 	/lib				rx

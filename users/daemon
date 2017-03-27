@@ -15,6 +15,7 @@ subject /bin/dash o {
     /bin                h
     /bin/dash           x
     /etc                h
+    /etc/localtime			r
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
     /lib                rx

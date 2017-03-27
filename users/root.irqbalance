@@ -1,0 +1,101 @@
+# Role: root
+subject /etc/init.d/irqbalance o {
+	/				
+	/bin				h
+	/bin/rm		x
+	/bin/echo		x
+	/bin/dash			x
+	/bin/run-parts			x
+	/sbin/start-stop-daemon		x
+	/boot				h
+	/dev				h
+	/dev/kmem			h
+	/dev/null			rw
+	/dev/port			h
+	/etc				rx
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/lib64				h
+	/lib64/modules			h
+	/proc				rw
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/irqbalance.pid		rwc
+	/run/systemd/journal/dev-log	rw
+	/run/systemd/system		
+	/sys				r
+	/usr				h
+	/usr/lib			rx
+	/usr/sbin			h
+	/usr/sbin/irqbalance		rx
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				
+	/var/backups			h
+	/var/log			wc
+	/var/spool/postfix/dev/log	wc
+	-CAP_ALL
+	+CAP_SETPCAP
+	bind	disabled
+	connect	disabled
+	sock_allow_family unix inet
+}
+
+# Role: root
+subject /usr/sbin/irqbalance o {
+	/				
+	/boot				h
+	/dev				h
+	/dev/kmem			h
+	/dev/null			rw
+	/dev/port			h
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba			h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib				rx
+	/lib/modules			h
+	/lib64				h
+	/lib64/modules			h
+	/proc				rw
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/run				h
+	/run/irqbalance.pid		wc
+	/sys				r
+	/usr				h
+	/usr/lib			rx
+	/usr/sbin			h
+	/usr/sbin/irqbalance		rx
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	/var				
+	/var/backups			h
+	/var/log			wc
+	/var/spool/postfix/dev/log	wc
+	-CAP_ALL
+	+CAP_SETPCAP
+	bind	disabled
+	connect	disabled
+	sock_allow_family unix inet
+}
