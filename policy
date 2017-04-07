@@ -16,7 +16,7 @@ define grsec_denied {
 	/etc/ssh	h
 }
 
-define  connect_dns {
+define  connect_nameservers {
 	connect 10.0.2.10/32:53 dgram udp
 	connect 10.0.2.26/32:53 dgram udp
 }
