@@ -1,4 +1,4 @@
-﻿subject /usr/sbin/php5-fpm o {
+subject /usr/sbin/php5-fpm o {
 user_transition_allow www-data
 group_transition_allow www-data
 
@@ -61,3 +61,4 @@ subject /usr/sbin/php5query o {
 	bind	disabled
 	connect	disabled
 }
+

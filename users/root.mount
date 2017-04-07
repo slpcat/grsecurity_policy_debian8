@@ -1,4 +1,5 @@
-﻿subject /bin/mount o {
+#autofs
+subject /bin/mount o {
 user_transition_allow root
 group_transition_allow root
 
@@ -127,3 +128,4 @@ subject /usr/sbin/rpc.idmapd o {
 	bind	disabled
 	connect	disabled
 }
+
