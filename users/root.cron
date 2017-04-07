@@ -59,8 +59,7 @@ subject /usr/sbin/cron-apt o {
 	/dev/null			w
 	/dev/urandom			
 	/etc				h
-	/etc/cron-apt/action.d		
-	/etc/cron-apt/config		r
+	/etc/cron-apt  r		
 	/etc/ld.so.cache		r
 	/etc/ld.so.preload		r
 	/lib				rx
@@ -109,9 +108,8 @@ subject /bin/cp o {
 }
 subject /bin/dash o {
 	/				
-	/bin				h
-	/bin/dash			x
-	/bin/run-parts			x
+	/bin				x
+	/sbin				x
 	/boot				h
 	/dev				h
 	/dev/null			w
@@ -132,11 +130,9 @@ subject /bin/dash o {
 	/run/systemd/journal/dev-log	rw
 	/sys				h
 	/usr				h
-	/usr/bin			h
-	/usr/bin/apt-show-versions	x
-	/usr/lib			x
-	/usr/sbin			h
-	/usr/sbin/cron-apt		x
+	/usr/bin			x
+	/usr/lib			rx
+	/usr/sbin			x
 	/usr/share			h
 	/usr/share/zoneinfo		r
 	/var/backups			h
@@ -213,6 +209,7 @@ group_transition_allow man
 	/dev/null			rw
 	/dev/urandom			r
 	/etc				rxi
+	/etc/cron.hourly  r
 	/etc/grsec2			h
 	/etc/gshadow			h
 	/etc/gshadow-			h
@@ -244,10 +241,7 @@ group_transition_allow man
 	/var/cache			h
 	/var/cache/apt			w
 	/var/cache/apt/pkgcache.bin	r
-	/var/cache/apt-show-versions	h
-	/var/cache/apt-show-versions/apackages-multiarch	wcd
-	/var/cache/apt-show-versions/files	wcd
-	/var/cache/apt-show-versions/ipackages-multiarch	wcd
+	/var/cache/apt-show-versions	wcd
 	/var/cache/man			
 	/var/lib			rwcd
 	/var/log			rwcdl
@@ -304,10 +298,7 @@ group_transition_allow man
 	/var/cache			h
 	/var/cache/apt			w
 	/var/cache/apt/pkgcache.bin	r
-	/var/cache/apt-show-versions	h
-	/var/cache/apt-show-versions/apackages-multiarch	wcd
-	/var/cache/apt-show-versions/files	wcd
-	/var/cache/apt-show-versions/ipackages-multiarch	wcd
+	/var/cache/apt-show-versions	wcd
 	/var/cache/man			
 	/var/lib			rwcd
 	/var/log			rwcdl
@@ -332,13 +323,9 @@ subject /etc/cron.monthly o {
 	/dev/mem			h
 	/dev/port			h
 	/etc				r
-	/etc/cron.daily			h
-	/etc/cron.daily/logrotate	
-	/etc/cron.monthly		h
-	/etc/cron.monthly/acct		r
-	/etc/cron.monthly/debsums	r
-	/etc/default			h
-	/etc/default/debsums		r
+	/etc/cron.daily			r
+	/etc/cron.monthly		r
+	/etc/default			r
 	/etc/grsec2			h
 	/etc/gshadow			h
 	/etc/gshadow-			h
@@ -350,11 +337,7 @@ subject /etc/cron.monthly o {
 	/etc/ssh			h
 	/lib				rxi
 	/lib/modules			h
-	/lib/x86_64-linux-gnu		h
-	/lib/x86_64-linux-gnu/ld-2.19.so	xi
-	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
-	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
-	/lib/x86_64-linux-gnu/libpthread-2.19.so	rxi
+	/lib/x86_64-linux-gnu		rxi
 	/lib64/modules			h
 	/proc				h
 	/proc/meminfo			r
@@ -386,19 +369,13 @@ user_transition_allow man
 group_transition_allow man
 
 	/				
-	/bin				h
-	/bin/dash			xi
-	/bin/egrep			rxi
-	/bin/grep			xi
+	/bin				xi
 	/boot				h
 	/dev				h
 	/dev/null			r
 	/etc				r
-	/etc/cron.weekly		h
-	/etc/cron.weekly/debsums	r
-	/etc/cron.weekly/man-db		r
-	/etc/default			h
-	/etc/default/debsums		r
+	/etc/cron.weekly		r
+	/etc/default			r
 	/etc/grsec2			h
 	/etc/gshadow			h
 	/etc/gshadow-			h
@@ -410,12 +387,7 @@ group_transition_allow man
 	/etc/ssh			h
 	/lib				rxi
 	/lib/modules			h
-	/lib/x86_64-linux-gnu		h
-	/lib/x86_64-linux-gnu/ld-2.19.so	xi
-	/lib/x86_64-linux-gnu/libc-2.19.so	rxi
-	/lib/x86_64-linux-gnu/libdl-2.19.so	rxi
-	/lib/x86_64-linux-gnu/libpcre.so.3.13.1	rxi
-	/lib/x86_64-linux-gnu/libpthread-2.19.so	rxi
+	/lib/x86_64-linux-gnu		rxi
 	/lib64/modules			h
 	/proc				r
 	/proc/bus			h
@@ -426,20 +398,15 @@ group_transition_allow man
 	/run				h
 	/run/nscd/socket		rw
 	/run/systemd/journal/dev-log	rw
-	/sbin				h
-	/sbin/start-stop-daemon		xi
+	/sbin				xi
 	/sys				h
 	/usr				h
-	/usr/bin			h
-	/usr/bin/debsums		
-	/usr/bin/mandb			
-	/usr/lib			h
-	/usr/lib/locale/locale-archive	r
-	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
+	/usr/bin			rx		
+	/usr/lib			rx
 	/usr/share			h
 	/usr/share/zoneinfo		r
 	/var				h
-	/var/cache/man			
+	/var/cache    rwcd			
 	-CAP_ALL
 	+CAP_SETGID
 	+CAP_SETUID
@@ -485,7 +452,7 @@ subject /usr/lib/php5/sessionclean o {
     /usr/share          h
     /usr/share/zoneinfo     r
     /var                h
-    /var/lib/php5/sessions
+    /var/lib/php5/sessions r
     -CAP_ALL
     bind    disabled
     connect disabled
@@ -607,10 +574,7 @@ subject /bin/run-parts o {
 }
 subject /sbin/killall5 o {
     /               h
-    /bin                h
-    /bin/dash
-    /bin/journalctl
-    /bin/zsh5
+    /bin                rx
     /etc                h
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
@@ -625,23 +589,14 @@ subject /sbin/killall5 o {
     /proc/modules           h
     /proc/slabinfo          h
     /proc/sys           h
-    /sbin               h
-    /sbin/agetty
-    /sbin/auditd
-    /sbin/killall5          rx
+    /sbin               rx
     /usr                h
-    /usr/bin            h
-    /usr/bin/dbus-daemon
-    /usr/bin/sort
-    /usr/bin/sudo
-    /usr/lib            h
-    /usr/lib/postfix/master
-    /usr/lib/postfix/pickup
-    /usr/lib/postfix/qmgr
-    /usr/sbin
+    /usr/bin            rx
+    /usr/lib            rx
+    /usr/sbin           rx
     -CAP_ALL
-	+CAP_DAC_READ_SEARCH
-	+CAP_DAC_OVERRIDE
+    +CAP_DAC_READ_SEARCH
+    +CAP_DAC_OVERRIDE
     bind    disabled
     connect disabled
     sock_allow_family unix inet

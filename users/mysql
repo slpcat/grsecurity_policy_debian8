@@ -9,7 +9,16 @@ subject /  {
 
 subject /usr/sbin/mysqld o {
     /               h
-	/etc		r
+		/etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
     /run                h
     /run/mysqld/mysqld.pid      rcwd
     /run/mysqld/mysqld.sock     rcwd

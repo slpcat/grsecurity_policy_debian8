@@ -1,0 +1,15 @@
+﻿role redis u
+role_allow_ip	0.0.0.0/32
+subject /  {
+	/				h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

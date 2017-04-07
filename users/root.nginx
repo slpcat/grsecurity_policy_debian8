@@ -1,5 +1,5 @@
 subject /usr/sbin/nginx o {
-    /               h
+  /               h
 	/etc				r
 	/etc/grsec2			h
 	/etc/gshadow			h
@@ -12,7 +12,7 @@ subject /usr/sbin/nginx o {
 	/lib/modules h
 	/lib64		x
 	/lib64/modules	h
-    /run/nginx.pid          wd
+  /run/nginx.pid          wd
 	/usr/lib	x
 	/usr/share/zoneinfo		r
 	/var/tmp/fastcgi_temp	rwcd
@@ -20,12 +20,12 @@ subject /usr/sbin/nginx o {
 	/var/cache/nginx rwcd
 	/var/log/nginx w
 	/proc/sys/kernel/ngroups_max r
-    -CAP_ALL
+  -CAP_ALL
 	+CAP_DAC_OVERRIDE
 	+CAP_SYS_NICE
 	+CAP_SYS_RESOURCE
 	+CAP_SETGID
 	+CAP_SETUID
-    bind    disabled
-    connect disabled
+  bind    disabled
+  connect disabled
 }

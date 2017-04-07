@@ -1,10 +1,9 @@
 role www-data u
-role_allow_ip	10.0.2.251/32
 role_allow_ip	0.0.0.0/32
 subject /  {
 	/				h
 	/etc/ld.so.cache		r
-	/lib/x86_64-linux-gnu/libgcc_s.so.1	rx
+	/lib/x86_64-linux-gnu	rx
 	-CAP_ALL
 	bind	disabled
 	connect	disabled
@@ -13,29 +12,31 @@ subject /  {
 subject /etc/init.d o {
 	/				h
 	/etc/ld.so.cache		r
-	/lib/x86_64-linux-gnu/libgcc_s.so.1	rxi
-	/run/php-fpm.sock		rw
-	/srv/whizoom_web		r
-    /var/www            r
+	/lib/x86_64-linux-gnu	rxi
+	/run		rw
+	/srv		r
+	/data   r
+	/var/www            r
 	-CAP_ALL
-	bind 10.0.2.251/32:8055 stream tcp
-    connect 127.0.0.1/32:3306 stream tcp
-    sock_allow_family ipv6
+	bind 10.0.2.137/32:8055 stream tcp
+	connect 127.0.0.1/32:3306 stream tcp
+  sock_allow_family ipv6
 }
 
 subject /opt/phpbrew/php/php-5.3.29/sbin/php-fpm o {
 	/				h
-    /boot           h
-	/etc/grsec2	    h		
-    /etc/gshadow            h
-    /etc/gshadow-           h
-    /etc/passwd         h
-    /etc/ppp            h
-    /etc/samba/smbpasswd        h
-    /etc/shadow-            h
+  /boot           h
+  /etc/grsec2	    h		
+  /etc/gshadow            h
+  /etc/gshadow-           h
+  /etc/passwd         h
+  /etc/ppp            h
+  /etc/samba/smbpasswd        h
+  /etc/shadow-            h
 	/etc/resolv.conf		r
 	/srv				rcwd
-    /usr                h
+	/srv/*.php	r
+  /usr                h
 	-CAP_ALL
 	bind	disabled
 	connect 127.0.0.1/32:3306 stream tcp
@@ -43,29 +44,65 @@ subject /opt/phpbrew/php/php-5.3.29/sbin/php-fpm o {
 }
 subject /usr/sbin/nginx o {
 	/				h
+	/boot               h
+  /dev/grsec          h
+  /dev/kmem           h
+  /dev/mem            h
+  /dev/port           h
 	/etc                r
-    /etc/grsec2         h
-    /etc/gshadow            h
-    /etc/gshadow-           h
-    /etc/passwd         h
-    /etc/ppp            h
-    /etc/samba/smbpasswd        h
-    /etc/shadow-            h
-    /lib                rx
-    /lib/modules            h
-    /lib64/modules          h
+  /etc/grsec2         h
+  /etc/gshadow            h
+  /etc/gshadow-           h
+  /etc/passwd         h
+  /etc/ppp            h
+  /etc/samba/smbpasswd        h
+  /etc/shadow-            h
+  /lib                rx
+  /lib/modules            h
+  /lib64/modules          h
 	/usr                h
-    /usr/lib			rx
-    /usr/sbin/nginx          x
-    /usr/share/zoneinfo     r
+  /usr/lib			rx
+  /usr/sbin/nginx          x
+  /usr/share/zoneinfo     r
 	/var/run/php-fpm.sock	rw
-	/srv/whizoom_web		r
+	/srv/		r
 	/var/log/nginx/access.log	a
 	/var/log/nginx/error.log	a
 	-CAP_ALL
-	bind 10.0.2.251/32:8055 stream tcp
+	bind 10.0.2.137/32:8055 stream tcp
 	connect	disabled
 }
+subject /usr/sbin/php5-fpm o {
+	/				
+	/boot				h
+	/dev				h
+	/dev/urandom			r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				h
+	/proc/meminfo			r
+	/data				r
+	/sys				h
+	/usr				h
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/lib/php5	rwcd
+	-CAP_ALL
+	bind	disabled
+	connect 10.0.3.51/32:3306 stream tcp
+	connect 10.0.2.120/32:6379 stream tcp
+	sock_allow_family ipv6
+}
+
 subject /usr/sbin/apache2 o {
     /               
     /boot               h
@@ -99,8 +136,9 @@ subject /usr/sbin/apache2 o {
     /var/backups            h
     /var/log            h
     /var/www            r
+    /var/www/*.php    r
     -CAP_ALL
-    bind 10.0.2.251/32:80 stream tcp
+    bind 10.0.2.137/32:80 stream tcp
     connect 127.0.0.1/32:3306 stream tcp
     sock_allow_family ipv6
 }

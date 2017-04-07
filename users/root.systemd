@@ -4,9 +4,9 @@ subject /lib/systemd/systemd-journald o {
     /dev                h
     /dev/urandom            r
     /etc				h
-    /etc/localtime		r
 		/etc/ld.so.cache		r
 		/etc/ld.so.preload		r
+		/etc/localtime  r
     /proc               r
     /proc/bus           h
     /proc/kallsyms          h
@@ -17,7 +17,7 @@ subject /lib/systemd/systemd-journald o {
     /run                rw
     /run/log/journal rwcd
     /usr                h
-    /usr/share/zoneinfo
+    /usr/share/zoneinfo r
     -CAP_ALL
     +CAP_SETGID
     +CAP_SETUID
@@ -50,17 +50,19 @@ subject /lib/systemd/systemd-logind o {
     connect disabled
 }
 subject /lib/systemd/systemd-udevd o {
-	/               h
+		/               h
     /etc                h
     /etc/modprobe.d
     /etc/systemd/network
     /etc/udev/rules.d
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /sys                h
     /sys/fs/cgroup/systemd/system.slice/systemd-udevd.service/cgroup.procs  r
     /usr                h
     /usr/lib/systemd    rx
+    /usr/share/zoneinfo r
     /run/udev           rwcd
     -CAP_ALL
     bind    disabled

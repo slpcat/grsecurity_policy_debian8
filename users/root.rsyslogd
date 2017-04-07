@@ -43,6 +43,6 @@ subject /usr/sbin/rsyslogd o {
     +CAP_SYS_NICE
     +CAP_SYSLOG
     bind 0.0.0.0/32:0 dgram ip
-    connect 10.0.2.26/32:53 dgram udp
+    $connect_nameservers
 }
 

@@ -53,11 +53,11 @@ subject /  {
 subject /bin/zsh5 o {
 	/				h
 	/bin				h
-    	/bin/cat            x
+	/bin/cat            x
 	/bin/zsh5			x
 	/dev				h
 	/dev/null			rw
-    	/dev/tty1           rw
+	/dev/tty1           rw
 	/dev/pts			rw
 	/etc				r
 	/etc/grsec2			h

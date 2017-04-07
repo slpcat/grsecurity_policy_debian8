@@ -6,8 +6,7 @@ subject /usr/sbin/nacctd oh {
 	/etc/protocols			r
 	/lib				
 	/lib/modules			h
-	/lib/x86_64-linux-gnu		
-	/lib/x86_64-linux-gnu/libnss_files-2.19.so	rx
+	/lib/x86_64-linux-gnu		rx
 	/run				h
 	/run/nacctd.pid			wc
 	/run/systemd/journal/dev-log	rw

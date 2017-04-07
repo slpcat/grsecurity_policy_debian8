@@ -1,7 +1,83 @@
 role zabbix u
+role_allow_ip   10.0.2.252/32
 role_allow_ip   0.0.0.0/32
 subject /  {
     /               h
+    /dev                h
+    /dev/pts            
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/locale.alias       r
+    /etc/localtime      r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/utmp           r
+    /usr                h
+    /usr/bin         x
+    /usr/lib  rx
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+
+subject /bin/dash o {
+    /               h
+    /bin                x
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/localtime          r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/bin         x
+    /usr/lib  rx
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+subject /bin/wc o {
+    /               h
+    /bin                x
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/localtime          r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/bin         x
+    /usr/lib  rx
+    /usr/share/zoneinfo     r
+    -CAP_ALL
+    bind    disabled
+    connect disabled
+}
+
+
+subject /bin/who o {
+    /               h
+    /bin                x
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/localtime          r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/bin         x
+    /usr/lib  rx
+    /usr/share/zoneinfo     r
     -CAP_ALL
     bind    disabled
     connect disabled
@@ -9,35 +85,34 @@ subject /  {
 
 subject /usr/sbin/zabbix_agentd o {
     /               
-    /bin                h
-    /bin/dash           x
+    /bin                x
     /boot               h
     /dev                h
     /dev/null           r
     /dev/urandom            r
-    /etc                h
-    /etc/passwd         r
-    /etc/zabbix/zabbix_agentd.conf  
-    /lib                h
-    /lib64              h
+    /etc r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib            x
+    /lib/modules            h
     /lib64/modules          h
     /proc               r
-    /proc/bus           h
-    /proc/kallsyms          h
-    /proc/kcore         h
-    /proc/modules           h
-    /proc/slabinfo          h
-    /run                h
-    /run/zabbix/zabbix_agentd.pid   wc
-    /sys                h
-    /sys/devices/system/cpu     
-    /sys/devices/system/cpu/online  r
+    /run                r
+    /run/zabbix/zabbix_agentd.pid   wcd
+    /sys                r
     /usr                h
-    /usr/sbin/zabbix_agentd     rx
+    /usr/bin         x
+    /usr/lib  rx
     /usr/share/zoneinfo     r
     /var                h
-    /var/log/zabbix/zabbix_agentd.log   ra
+    /var/log/zabbix   ra
     -CAP_ALL
-    bind 10.0.2.137/32:10050 stream icmp tcp
+    bind 10.0.2.137/32:10050 stream tcp
     connect disabled
 }

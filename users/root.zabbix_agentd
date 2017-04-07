@@ -15,10 +15,7 @@ group_transition_allow zabbix
     /etc/shadow         h
     /etc/shadow-            h
     /etc/ssh            h
-    /etc/zabbix         
-    /etc/zabbix/zabbix_agentd.conf  r
-    /etc/zabbix/zabbix_agentd.d 
-    /etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf    r
+    /etc/zabbix         r
     /lib                rx
     /lib/modules            h
     /proc               h

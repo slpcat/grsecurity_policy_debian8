@@ -108,7 +108,7 @@ subject /usr/bin/debsecan o {
     /var/lib/dpkg/status        r
     -CAP_ALL
     bind 0.0.0.0/32:0 dgram ip
-    connect 10.0.2.26/32:53 dgram udp
+    $connect_nameservers
     connect 128.31.0.67/32:443 stream tcp
 }
 subject /usr/sbin/postdrop o {
@@ -118,6 +118,7 @@ subject /usr/sbin/postdrop o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -136,16 +137,16 @@ subject /usr/sbin/postdrop o {
     connect disabled
     sock_allow_family ipv6 netlink
 }
+
 subject /usr/sbin/sendmail o {
     /               h
     /dev/null       rw
     /etc                h
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
-    /etc/postfix            h
-    /etc/postfix/dynamicmaps.cf r
-    /etc/postfix/main.cf        r
+    /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -161,8 +162,7 @@ subject /usr/sbin/sendmail o {
     /var                h
     /var/spool/postfix
     -CAP_ALL
-    bind    disabled
+    bind    127.0.0.1/32:25 stream tcp
     connect disabled
-    sock_allow_family netlink
+    sock_allow_family ipv6 netlink
 }
-

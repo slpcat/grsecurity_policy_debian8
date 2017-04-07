@@ -38,11 +38,11 @@ subject /usr/sbin/openvpn o {
 	/run				h
 	/run/systemd/journal/dev-log	rw
 	/usr				h
-    /usr/sbin/openvpn   rx
+  /usr/sbin/openvpn   rx
 	/usr/share/zoneinfo		
 	-CAP_ALL
 	bind	disabled
-    connect 0.0.0.0/32:1024-65535 icmp
+  connect 0.0.0.0/32:1024-65535 icmp
 	connect 0.0.0.0/0:1024-65535 dgram udp
 }
 

@@ -1,4 +1,4 @@
-subject /usr/sbin/php-fpm7.0 o {
+﻿subject /usr/sbin/php5-fpm o {
 user_transition_allow www-data
 group_transition_allow www-data
 
@@ -22,13 +22,13 @@ group_transition_allow www-data
 	/proc/sys/kernel/ngroups_max	r
 	/run				h
 	/run/nscd/socket		rw
-	/run/php		wc
+	/run/php/		wc
 	/run/systemd/notify		rw
 	/tmp				rwcd
 	/usr				h
 	/usr/lib			rx
 	/var				h
-	/var/log/php7.0-fpm.log		a
+	/var/log/php5-fpm.log		a
 	-CAP_ALL
 	+CAP_CHOWN
 	+CAP_DAC_OVERRIDE
@@ -38,7 +38,7 @@ group_transition_allow www-data
 	connect	disabled
 }
 
-subject /usr/sbin/phpquery o {
+subject /usr/sbin/php5query o {
 	/				h
 	/bin				h
 	/bin/dash			x

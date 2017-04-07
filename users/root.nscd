@@ -8,10 +8,10 @@ subject /usr/sbin/nscd oh {
     /proc/modules           h
     /proc/slabinfo          h
     /proc/sys           h
-	/proc/sys/kernel/ngroups_max	r
+		/proc/sys/kernel/ngroups_max	r
     /proc/sys/vm/overcommit_memory  r
     /sys/devices/system/cpu/online  r
     -CAP_ALL
     bind 0.0.0.0/32:0 dgram ip
-    connect 10.0.2.26/32:53 dgram udp
+    $connect_nameservers
 }

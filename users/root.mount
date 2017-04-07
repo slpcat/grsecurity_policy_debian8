@@ -1,0 +1,129 @@
+﻿subject /bin/mount o {
+user_transition_allow root
+group_transition_allow root
+
+	/				h
+	/bin				h
+	/bin/mount			x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/filesystems		r
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/sbin				h
+	/sbin/mount.nfs			x
+	/srv				
+	/usr				h
+	/usr/lib	r
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	bind	disabled
+	connect	disabled
+}
+subject /bin/umount o {
+user_transition_allow root
+group_transition_allow root
+
+	/				h
+	/bin				h
+	/bin/umount			x
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/filesystems		r
+	/run				
+	/run/systemd/journal/dev-log	rw
+	/sbin				h
+	/sbin/mount.nfs			x
+	/srv				h
+	/srv/web_online
+	/srv/web_test			
+	/usr				h
+	/usr/lib	r
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	+CAP_SETGID
+	+CAP_SETUID
+	bind	disabled
+	connect	disabled
+}
+subject /sbin/mount.nfs o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/mtab			
+	/lib				rx
+	/lib/modules			h
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/self			
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				
+	/sbin				h
+	/sbin/mount.nfs			x
+	/srv				
+	/usr				h
+	/usr/lib	rx
+	/web_online			
+	/web_test
+	-CAP_ALL
+	+CAP_SYS_ADMIN
+	bind 0.0.0.0/32:0 dgram udp
+	connect 10.0.2.12/32:0 dgram udp
+}
+subject /usr/sbin/automount o {
+	/				h
+	/bin				h
+	/bin/mount			x
+	/bin/umount			x
+	/etc				h
+	/etc/auto.misc			
+	/etc/mtab			
+	/proc				r
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/mounts			
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				wd
+	/run/nscd			h
+	/run/nscd/socket		rw
+	/run/systemd			h
+	/run/systemd/journal/dev-log	rw
+	/srv				
+	/srv/web_online			rwcd
+	/usr				h
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	+CAP_SYS_ADMIN
+	bind 0.0.0.0/32:0 stream tcp
+	connect 10.0.2.12/32:2049 stream tcp
+	sock_allow_family netlink
+}
+subject /usr/sbin/rpc.idmapd o {
+	/				h
+	/run/rpc_pipefs/nfs		
+	/run/rpc_pipefs/nfs/clnt1	
+	/run/rpc_pipefs/nfs/clnt1/idmap	rw
+	/run/systemd/journal/dev-log	rw
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}

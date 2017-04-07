@@ -1,10 +1,20 @@
 subject /usr/lib/postfix/master o {
-    /               h
-    /               h
-    /usr/lib/postfix     x
+		/               h
+    /etc                h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/postfix            r
+    /etc/resolv.conf        r
+    /etc/localtime	r
+    /lib                rx
+    /lib/modules            h
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /usr                h
+    /usr/lib            rx
     /var/spool/postfix    rw
     /run/systemd/journal/dev-log rw
-	/run/nscd/socket r
     -CAP_ALL
     +CAP_KILL
     +CAP_DAC_READ_SEARCH
@@ -38,7 +48,7 @@ subject /usr/lib/postfix/qmgr o {
     +CAP_SYS_CHROOT
     bind 127.0.0.1/32:25 icmp
     bind 0.0.0.0/32:0 dgram ip
-    connect 10.0.2.26/32:53 dgram udp
+    $connect_nameservers
     sock_allow_family ipv6 netlink
 }
 subject /usr/lib/postfix/pickup o {
@@ -72,7 +82,7 @@ group_transition_allow postfix
     +CAP_SETUID
     +CAP_SYS_CHROOT
     #bind 127.0.0.1/32:25 icmp 
-	bind 127.0.0.1/32:25 stream tcp
+		bind 127.0.0.1/32:25 stream tcp
     connect disabled
     sock_allow_family ipv6 netlink
 }
@@ -97,7 +107,7 @@ subject /usr/sbin/postconf o {
 	/usr/sbin/postconf		x
 	-CAP_ALL
 	bind 0.0.0.0/32:0 dgram ip
-	connect 10.0.2.26/32:53 dgram udp
+	$connect_nameservers
 }
 
 subject /usr/sbin/postdrop o {
@@ -107,6 +117,7 @@ subject /usr/sbin/postdrop o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -148,7 +159,7 @@ subject /usr/sbin/postmulti o {
 	/usr/share/zoneinfo		r
 	-CAP_ALL
 	bind 0.0.0.0/32:0 dgram ip
-	connect 10.0.2.26/32:53 dgram udp
+	$connect_nameservers
 	sock_allow_family netlink
 }
 
@@ -159,6 +170,7 @@ subject /usr/lib/postfix/cleanup o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -189,6 +201,7 @@ subject /usr/lib/postfix/local o {
     /etc/aliases            r
     /etc/aliases.db         r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -222,6 +235,7 @@ subject /usr/lib/postfix/bounce o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -250,6 +264,7 @@ subject /usr/lib/postfix/flush o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -278,6 +293,7 @@ subject /usr/lib/postfix/trivial-rewrite o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
+    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h
@@ -301,12 +317,13 @@ subject /usr/lib/postfix/trivial-rewrite o {
 }
 subject /usr/sbin/sendmail o {
 	/				h
-    /dev/null       rw
+  /dev/null       rw
 	/etc				h
 	/etc/ld.so.cache		r
 	/etc/ld.so.preload		r
 	/etc/postfix			r
 	/etc/resolv.conf		r
+	/etc/localtime	r
 	/lib				rx
 	/lib/modules			h
 	/run				h

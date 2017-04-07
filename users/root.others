@@ -11,11 +11,7 @@ subject /bin/ps o {
 	/etc/locale.alias		r
 	/lib				rx
 	/lib/modules			h
-	/lib/x86_64-linux-gnu		h
-	/lib/x86_64-linux-gnu/ld-2.19.so	x
-	/lib/x86_64-linux-gnu/libc-2.19.so	rx
-	/lib/x86_64-linux-gnu/libdl-2.19.so	rx
-	/lib/x86_64-linux-gnu/libprocps.so.3.0.0	rx
+	/lib/x86_64-linux-gnu		rx
 	/proc				r
 	/proc/bus			h
 	/proc/kallsyms			h
@@ -25,7 +21,7 @@ subject /bin/ps o {
 	/run				h
 	/run/nscd/socket		rw
 	/sys				h
-	/sys/devices/system/cpu/online	
+	/sys/devices/system/cpu/online	r
 	/usr				h
 	/usr/lib			r
 	/usr/share			h
@@ -42,7 +38,7 @@ subject /bin/zsh5 o {
 	/boot				h
 	/dev				r
 	/dev/null			rw
-    /dev/tty1           rw
+  /dev/tty1           rw
 	/dev/pts			rw
 	/etc				r
 	/etc/grsec2			h
