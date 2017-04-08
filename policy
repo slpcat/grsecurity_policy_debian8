@@ -43,14 +43,14 @@ define connect_nfs {
   connect 10.0.2.12/32:0 dgram udp
 }
 
-define role_ssh_client {
-  role_allow_ip	10.0.2.251/32
-  role_allow_ip 10.8.0.0/8
-}
+#define role_ssh_client {
+#  role_allow_ip	10.0.2.251/32
+#  role_allow_ip 10.8.0.0/8
+#}
 
-define role_zabbix_server {
-  role_allow_ip 10.0.2.252/32
-}
+#define role_zabbix_server {
+#  role_allow_ip 10.0.2.252/32
+#}
 
 role admin sA
 subject / rvka

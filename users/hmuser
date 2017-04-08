@@ -1,59 +1,115 @@
 role hmuser u
-$role_ssh_client
+role_allow_ip	10.0.2.251/32
+role_allow_ip 10.8.0.0/8
 role_allow_ip	0.0.0.0/32
 subject /  {
-    /               h
-    /bin                h
-    /bin/cat            x
-    /bin/zsh           
-    /bin/zsh5           x
-    /dev                h
-    /dev/null           rw
-    /dev/urandom            r
-    /etc                r
-    /etc/alternatives       h
-    /etc/grsec2         h
-    /etc/gshadow            h
-    /etc/gshadow-           h
-    /etc/passwd         h
-    /etc/ppp            h
-    /etc/samba/smbpasswd        h
-    /etc/shadow         h
-    /etc/shadow-            h
-    /etc/ssh            h
-    /home               h
-    /home/hmuser        rwcd            
-    /lib                rx
-    /lib/modules            h
-    /proc               
-    /proc/bus           h
-    /proc/kallsyms          h
-    /proc/kcore         h
-    /proc/modules           h
-    /proc/slabinfo          h
-    /proc/sys           h
-    /sbin               h
-    /sbin/pam-tmpdir-helper     x
-    /usr                h
-    /usr/bin            h
-    /usr/bin/dircolors      x
-    /usr/bin/perl           x
-    /usr/lib            h
-    /usr/lib/locale  r
-    /usr/lib/x86_64-linux-gnu rx   
-    -CAP_ALL
-    +CAP_CHOWN
-    bind    disabled
-    connect disabled
+	/				
+	/bin				h
+	/bin/ls				x
+	/bin/mv				x
+	/bin/rm				x
+	/boot				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				r
+	/etc/grsec2			h
+	/etc/gshadow			h
+	/etc/gshadow-			h
+	/etc/passwd			h
+	/etc/perl			h
+	/etc/perl/sitecustomize.pl	r
+	/etc/ppp			h
+	/etc/samba/smbpasswd		h
+	/etc/shadow			h
+	/etc/shadow-			h
+	/etc/ssh			h
+	/home				h
+	/home/hmuser			r
+	/lib				rx
+	/lib/modules			h
+	/lib64/modules			h
+	/proc				
+	/proc/bus			h
+	/proc/filesystems		r
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/sbin				h
+	/sbin/pam-tmpdir-helper		x
+	/sys				h
+	/tmp				rwcd
+	/usr				h
+	/usr/bin			x
+	/usr/lib			rx
+	/usr/share			r
+	/var/backups			h
+	/var/log			h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /bin/bash o {
+	/				h
+	/bin				h
+	/bin/bash			x
+	/bin/mv				x
+	/bin/rm				x
+	/dev				h
+	/dev/pts			
+	/dev/tty			rw
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/home				h
+	/home/hmuser        r			
+	/lib				rx
+	/lib/modules			h
+	/proc				
+	/proc/bus			h
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/meminfo			r
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/systemd/journal/dev-log	rw
+	/tmp				
+	/usr				h
+	/usr/bin			h
+	/usr/bin/git			x
+	/usr/bin/rsync			x
+	/usr/bin/tput			x
+	/usr/lib			h
+	/usr/lib/locale/locale-archive	r
+	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
+	/usr/share			h
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
 }
 
 subject /bin/zsh5 o {
 	/				h
-	/bin				x
+	/bin				
+	/bin/bash			x
+	/bin/ls				x
+	/bin/zsh5			x
 	/dev				h
 	/dev/null			rw
-	/dev/tty1           rw
 	/dev/pts			rw
+	/dev/tty0           rw
+  /dev/tty1           rw
+  /dev/tty2           rw
+  /dev/tty3           rw
+  /dev/tty4           rw
+  /dev/tty5           rw
+  /dev/tty6           rw
 	/etc				r
 	/etc/grsec2			h
 	/etc/gshadow			h
@@ -64,8 +120,19 @@ subject /bin/zsh5 o {
 	/etc/shadow			h
 	/etc/shadow-			h
 	/etc/ssh			h
+	/etc/zsh			h
+	/etc/zsh/zlogin			r
+	/etc/zsh/zlogout		r
+	/etc/zsh/zprofile		r
+	/etc/zsh/zshenv			r
+	/etc/zsh/zshrc			r
 	/home				h
-	/home/hmuser	rwcd
+	/home/hmuser			    rx
+	/home/hmuser/.zcompdump		r
+	/home/hmuser/.zsh_history	rwcd
+	/home/hmuser/.zsh_history.LOCK	wcd
+	/home/hmuser/.zsh_history.new	rwcd
+	/home/hmuser/.zshrc		r
 	/lib				rx
 	/lib/modules			h
 	/proc				r
@@ -80,55 +147,20 @@ subject /bin/zsh5 o {
 	/run/systemd/journal/dev-log	rw
 	/run/utmp			r
 	/usr				h
-	/usr/bin			rx
+	/usr/bin			
+	/usr/bin/dircolors		x
+	/usr/bin/getent			x
+	/usr/bin/perl			x
+    /usr/bin/sudo           x
+	/usr/games			
 	/usr/lib			rx
 	/usr/local			h
-	/usr/local/bin	rx		
-	/usr/local/share r	
+	/usr/local/bin			
+	/usr/local/share/zsh		
 	/usr/share			r
 	-CAP_ALL
 	bind	disabled
 	connect	disabled
-}
-subject /sbin/pam-tmpdir-helper o {
-    /
-    /boot               h
-    /dev/grsec          h
-    /dev/kmem           h
-    /dev/mem            h
-    /dev/port           h
-    /etc
-    /etc/grsec2         h
-    /etc/gshadow            h
-    /etc/gshadow-           h
-    /etc/ld.so.cache        r
-    /etc/ld.so.preload      r
-    /etc/passwd         h
-    /etc/ppp            h
-    /etc/samba/smbpasswd        h
-    /etc/shadow         h
-    /etc/shadow-            h
-    /etc/ssh            h
-    /lib                rx
-    /lib/modules            h
-    /lib64/modules          h
-    /proc/bus           h
-    /proc/kallsyms          h
-    /proc/kcore         h
-    /proc/modules           h
-    /proc/slabinfo          h
-    /proc/sys           h
-    /sbin               h
-    /sbin/pam-tmpdir-helper     x
-    /sys                h
-    /tmp                wc
-    /usr/src            h
-    /var/backups            h
-    /var/log            h
-    -CAP_ALL
-    +CAP_CHOWN
-    bind    disabled
-    connect disabled
 }
 
 subject /usr/bin/getent o {
@@ -136,17 +168,154 @@ subject /usr/bin/getent o {
 	/etc				h
 	/etc/ld.so.cache		r
 	/etc/ld.so.preload		r
-	/etc/locale.alias		r
 	/lib				rx
 	/lib/modules			h
 	/run				h
 	/run/nscd/socket		rw
 	/usr				h
-	/usr/bin			h
 	/usr/bin/getent			x
-	/usr/lib			r
+	/usr/lib/locale/locale-archive	r
 	-CAP_ALL
 	bind	disabled
 	connect	disabled
 }
 
+subject /usr/bin/rsync o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/home				h
+	/home/hmuser/rsync.pwd		r
+	/lib				rx
+	/lib/modules			h
+	/tmp				r
+	/usr				h
+	/usr/bin/rsync			x
+	/usr/lib/locale/locale-archive	r
+	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
+	-CAP_ALL
+	bind	disabled
+	connect 10.0.2.0/24:873 stream tcp
+}
+
+subject /usr/bin/ssh o {
+	/				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/ssh/ssh_config		r
+	/etc/ssl/openssl.cnf		r
+	/home				h
+	/home/hmuser/.ssh		
+	/home/hmuser/.ssh/id_rsa	r
+	/home/hmuser/.ssh/id_rsa.pub	r
+	/home/hmuser/.ssh/known_hosts	r
+	/lib				rx
+	/lib/modules			h
+	/proc				
+	/proc/bus			h
+	/proc/filesystems		r
+	/proc/kallsyms			h
+	/proc/kcore			h
+	/proc/modules			h
+	/proc/slabinfo			h
+	/proc/sys			h
+	/run				h
+	/run/nscd/socket		rw
+	/tmp				rwcdl
+	/usr				h
+	/usr/bin			h
+	/usr/bin/ssh			x
+	/usr/lib			h
+	/usr/lib/x86_64-linux-gnu	rx
+	-CAP_ALL
+	bind	disabled
+	connect 10.0.2.250/32:22 stream tcp
+}
+
+subject /usr/lib/git-core/git o {
+	/				h
+	/dev				h
+	/dev/null			rw
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/locale.alias		r
+	/home				h
+	/home/hmuser			
+	/home/hmuser/.gitconfig		r
+	/lib				rx
+	/lib/modules			h
+	/proc				h
+	/proc/meminfo			r
+	/proc/sys/vm/overcommit_memory	r
+	/sys				h
+	/sys/devices/system/cpu/online	r
+	/tmp				rwcdl
+	/usr				h
+	/usr/lib/git-core/git		x
+	/usr/lib/locale/locale-archive	r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+subject /bin/login o {
+user_transition_allow nobody hmuser root
+group_transition_allow nogroup hmuser root
+
+    /               
+    /bin                rx
+    /boot               h
+    /dev                h
+    /dev/null           rw
+    /dev/tty1           w
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc               rw
+    /proc/bus           h
+    /proc/filesystems       r
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys/kernel/ngroups_max    r
+    /run                h
+    /run/nscd/socket        rw
+    /run/systemd/journal/dev-log    rw
+    /run/utmp           rw
+    /sbin				h
+    /sbin/pam-tmpdir-helper		x
+    /sys                h
+    /usr                h
+    /usr/bin            rx
+    /usr/lib/x86_64-linux-gnu rx
+    /usr/share/zoneinfo     r
+    /var                h
+    /var/log/lastlog        rw
+    /var/log/wtmp           w
+    -CAP_ALL
+    +CAP_CHOWN
+    +CAP_FOWNER
+    +CAP_FSETID
+    +CAP_SETGID
+    +CAP_SETUID
+    +CAP_SYS_RESOURCE
+    +CAP_AUDIT_WRITE
+    bind    disabled
+    connect disabled
+    sock_allow_family netlink
+}

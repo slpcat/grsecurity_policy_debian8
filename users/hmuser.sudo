@@ -52,6 +52,7 @@ user_transition_allow root nobody
 	/dev				h
 	/dev/pts			rw
 	/dev/tty			rw
+	/etc/motd	r
 	/home				h
 	/home/hmuser r			
 	/proc				

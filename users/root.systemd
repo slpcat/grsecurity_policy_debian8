@@ -33,6 +33,7 @@ subject /lib/systemd/systemd-logind o {
     /dev                h
     /dev/input          h
     /dev/input/event4       rw
+    /dev/tty0           rw
     /dev/tty1           rw
     /dev/tty2           rw
     /dev/tty3           rw
@@ -75,6 +76,13 @@ subject /lib/systemd/systemd o {
     /bin                rx
     /boot               h
     /dev
+    /dev/tty0           rw
+    /dev/tty1           rw
+    /dev/tty2           rw
+    /dev/tty3           rw                
+    /dev/tty4           rw
+    /dev/tty5           rw
+    /dev/tty6           rw
     /dev/grsec          h
     /dev/kmem           h
     /dev/mem            h
@@ -113,6 +121,7 @@ subject /lib/systemd/systemd o {
     /usr/sbin           rx
     /var/backups            h
     /var/log            h
+    /var/log/wtmp           rw
     -CAP_ALL
     +CAP_KILL
     +CAP_NET_ADMIN
@@ -221,7 +230,7 @@ subject /etc/init.d o {
     +CAP_SYS_NICE
     +CAP_SYS_RESOURCE
     +CAP_SYS_PACCT
-    bind 10.0.2.251/32:8055 stream tcp
+    bind 10.0.2.137/32:8055 stream tcp
     bind 127.0.0.1/32:25 stream tcp
     connect disabled
     sock_allow_family netlink

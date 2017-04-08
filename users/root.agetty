@@ -36,6 +36,7 @@ subject /sbin/agetty o {
     +CAP_FSETID
     +CAP_SYS_ADMIN
     +CAP_SYS_TTY_CONFIG
+    +CAP_CHOWN
     bind    disabled
     connect disabled
 }

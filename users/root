@@ -1,6 +1,7 @@
 role root uG
 role_transitions admin shutdown
-$role_ssh_client
+role_allow_ip	10.0.2.251/32
+role_allow_ip 10.8.0.0/8
 role_allow_ip	0.0.0.0/32
 subject /  {
 	/				

@@ -48,7 +48,7 @@ subject /usr/lib/postfix/qmgr o {
     +CAP_SYS_CHROOT
     bind 127.0.0.1/32:25 icmp
     bind 0.0.0.0/32:0 dgram ip
-    $connect_nameservers
+    $connect_nameserver
     sock_allow_family ipv6 netlink
 }
 subject /usr/lib/postfix/pickup o {
@@ -107,7 +107,7 @@ subject /usr/sbin/postconf o {
 	/usr/sbin/postconf		x
 	-CAP_ALL
 	bind 0.0.0.0/32:0 dgram ip
-	$connect_nameservers
+	$connect_nameserver
 }
 
 subject /usr/sbin/postdrop o {

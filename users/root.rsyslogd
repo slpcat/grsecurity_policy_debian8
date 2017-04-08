@@ -44,6 +44,6 @@ subject /usr/sbin/rsyslogd o {
     +CAP_SYSLOG
     bind 0.0.0.0/32:0 dgram ip
     $connect_logserver
-    $connect_nameservers
+    $connect_nameserver
 }
 

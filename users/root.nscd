@@ -13,5 +13,5 @@ subject /usr/sbin/nscd oh {
     /sys/devices/system/cpu/online  r
     -CAP_ALL
     bind 0.0.0.0/32:0 dgram ip
-    $connect_nameservers
+    $connect_nameserver
 }
