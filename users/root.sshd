@@ -41,6 +41,7 @@ group_transition_allow root hmuser nogroup
     /var                h
     /var/log/lastlog        rw
     /var/log/wtmp           w
+    /var/log/btmp           w
     -CAP_ALL
     +CAP_CHOWN
     +CAP_SETGID
