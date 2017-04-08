@@ -34,12 +34,14 @@ subject /bin/ps o {
 subject /bin/zsh5 o {
 	/				
 	/bin				
+	/bin/ps				x
+	/bin/uname			x
 	/bin/zsh5			x
 	/boot				h
 	/dev				r
 	/dev/null			rw
-  /dev/tty1           rw
 	/dev/pts			rw
+  /dev/tty1           rw
 	/etc				r
 	/etc/grsec2			h
 	/etc/gshadow			h
@@ -84,6 +86,8 @@ subject /bin/zsh5 o {
 	/usr/bin			x
 	/usr/lib			rx
 	/usr/local			h
+	/usr/local/bin			
+	/usr/local/sbin			
 	/usr/local/share/zsh		
 	/usr/sbin			
 	/usr/sbin/service		x
@@ -95,6 +99,7 @@ subject /bin/zsh5 o {
 	bind	disabled
 	connect	disabled
 }
+
 subject /bin/kill o {
     /               h
     /bin                h

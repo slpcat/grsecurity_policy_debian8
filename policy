@@ -16,9 +16,40 @@ define grsec_denied {
 	/etc/ssh	h
 }
 
-define  connect_nameservers {
+define connect_nameserver {
 	connect 10.0.2.10/32:53 dgram udp
 	connect 10.0.2.26/32:53 dgram udp
+}
+
+define connect_ntpserver {
+	connect 10.0.2.10/32:123 dgram udp
+	connect 10.0.2.26/32:123 dgram udp
+}
+
+define connect_logserver {
+  connect 10.0.2.253/32:514 dgram udp
+}
+
+define connect_mysqlserver {
+  connect 10.0.3.51/32:3306 stream tcp
+}
+
+define connect_redis {
+	connect 10.0.2.120/32:6379 stream tcp
+}
+
+define connect_nfs {
+  connect 10.0.2.12/32:2049 stream tcp
+  connect 10.0.2.12/32:0 dgram udp
+}
+
+define role_ssh_client {
+  role_allow_ip	10.0.2.251/32
+  role_allow_ip 10.8.0.0/8
+}
+
+define role_zabbix_server {
+  role_allow_ip 10.0.2.252/32
 }
 
 role admin sA

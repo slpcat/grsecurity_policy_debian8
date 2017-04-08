@@ -15,6 +15,6 @@ subject /lib/systemd/systemd-timesyncd o {
     -CAP_ALL
     +CAP_SYS_TIME
     bind 0.0.0.0/32:0 dgram ip udp
-    connect 10.0.2.26/32:123 dgram udp
+    $connect_ntpserver
     sock_allow_family netlink
 }

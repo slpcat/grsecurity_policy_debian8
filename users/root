@@ -1,6 +1,6 @@
 role root uG
 role_transitions admin shutdown
-role_allow_ip	10.0.2.251/32
+$role_ssh_client
 role_allow_ip	0.0.0.0/32
 subject /  {
 	/				
@@ -10,14 +10,10 @@ subject /  {
 	/dev/null			r
 	/dev/urandom			r
 	/etc				r
-	/etc/default			h
-	/etc/default/sysstat		r
 	/etc/grsec2			h
 	/etc/gshadow			h
 	/etc/gshadow-			h
 	/etc/passwd			h
-	/etc/perl			h
-	/etc/perl/sitecustomize.pl	r
 	/etc/ppp			h
 	/etc/samba/smbpasswd		h
 	/etc/shadow			h
@@ -34,8 +30,7 @@ subject /  {
 	/proc/slabinfo			h
 	/proc/sys			h
 	/run				h
-	/run/systemd			
-	/run/systemd/ask-password-block	r
+	/run/systemd r			
 	/sbin				h
 	/sbin/pam-tmpdir-helper		x
 	/sys				h

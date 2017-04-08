@@ -52,19 +52,20 @@ subject /lib/systemd/systemd-logind o {
 subject /lib/systemd/systemd-udevd o {
 		/               h
     /etc                h
-    /etc/modprobe.d
-    /etc/systemd/network
-    /etc/udev/rules.d
+    /etc/modprobe.d r
+    /etc/systemd r
+    /etc/udev r
     /etc/localtime	r
     /lib                rx
-    /lib/modules            h
-    /sys                h
-    /sys/fs/cgroup/systemd/system.slice/systemd-udevd.service/cgroup.procs  r
+    /sys                rw
+    /proc                rw
     /usr                h
-    /usr/lib/systemd    rx
+    /usr/lib    rx
     /usr/share/zoneinfo r
-    /run/udev           rwcd
+    /run           rwcd
     -CAP_ALL
+    +CAP_DAC_OVERRIDE
+    +CAP_NET_ADMIN
     bind    disabled
     connect disabled
     sock_allow_family netlink unix inet
@@ -169,6 +170,7 @@ subject /etc/init.d o {
     /bin                xi
     /boot               h
     /dev                h
+    /dev/autofs           rw
     /dev/null           rw
     /dev/random
     /dev/tty            rw
@@ -189,23 +191,17 @@ subject /etc/init.d o {
     /opt                h
     /opt/phpbrew
     /proc               rw
-    /proc/bus           h
-    /proc/kallsyms          h
-    /proc/kcore         h
-    /proc/modules           h
-    /proc/slabinfo          h
     /run                rwcd
-    /sbin               h
-    /sbin/agetty
-    /sbin/auditd
-    /sbin/start-stop-daemon     xi
+    /sbin               rxi
     /sys	rw
+    /tmp                rwcd
     /usr                h
     /usr/bin            rxi
     /usr/lib            rxi
     /usr/sbin           rxi
     /usr/share r
     /var
+    /var/run                rwcd
     /var/backups            h
     /var/cache          rwcd
     /var/lib			rwcd
@@ -219,6 +215,7 @@ subject /etc/init.d o {
     +CAP_SETUID
     +CAP_SETPCAP
     +CAP_NET_BIND_SERVICE
+    +CAP_SYS_ADMIN
     +CAP_SYS_CHROOT
     +CAP_SYS_PTRACE
     +CAP_SYS_NICE

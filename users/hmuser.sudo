@@ -3,8 +3,7 @@ user_transition_allow root nobody
 group_transition_allow nogroup hmuser root
 
 	/				h
-	/bin				h
-	/bin/zsh5			
+	/bin				x	
 	/dev				h
 	/dev/console			
 	/dev/pts			
@@ -29,17 +28,13 @@ group_transition_allow nogroup hmuser root
 	/run/nscd/socket		rw
 	/run/systemd/journal/dev-log	rw
 	/usr				h
-	/usr/bin			h
-	/usr/bin/sudo			x
+	/usr/bin			x
 	/usr/lib			rx
-	/usr/sbin			h
-	/usr/sbin/sendmail		x
+	/usr/sbin			x
 	/usr/share			h
 	/usr/share/zoneinfo		r
 	/var				h
-	/var/lib/sudo/lectured		
-	/var/lib/sudo/ts		
-	/var/lib/sudo/ts/hmuser		rw
+	/var/lib/sudo  rw
 	-CAP_ALL
 	+CAP_SETGID
 	+CAP_SETUID
@@ -53,13 +48,12 @@ subject /usr/sbin/sshd o {
 user_transition_allow root nobody
 
 	/				h
-	/bin				h
-	/bin/zsh5			x
+	/bin				x
 	/dev				h
 	/dev/pts			rw
 	/dev/tty			rw
 	/home				h
-	/home/hmuser			
+	/home/hmuser r			
 	/proc				
 	/proc/bus			h
 	/proc/kallsyms			h
@@ -69,8 +63,7 @@ user_transition_allow root nobody
 	/proc/sys			h
 	/run				h
 	/run/systemd/journal/dev-log	rw
-	/sbin				h
-	/sbin/pam-tmpdir-helper		x
+	/sbin				x
 	-CAP_ALL
 	+CAP_SETUID
 	bind	disabled

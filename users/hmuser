@@ -1,15 +1,14 @@
 role hmuser u
-role_allow_ip	10.0.2.251/32
-role_allow_ip   10.8.0.0/8
+$role_ssh_client
 role_allow_ip	0.0.0.0/32
 subject /  {
     /               h
     /bin                h
     /bin/cat            x
-    /bin/zsh
+    /bin/zsh           
     /bin/zsh5           x
     /dev                h
-    /dev/null           r
+    /dev/null           rw
     /dev/urandom            r
     /etc                r
     /etc/alternatives       h
@@ -17,8 +16,6 @@ subject /  {
     /etc/gshadow            h
     /etc/gshadow-           h
     /etc/passwd         h
-    /etc/perl           h
-    /etc/perl/sitecustomize.pl  r
     /etc/ppp            h
     /etc/samba/smbpasswd        h
     /etc/shadow         h
@@ -52,9 +49,7 @@ subject /  {
 
 subject /bin/zsh5 o {
 	/				h
-	/bin				h
-	/bin/cat            x
-	/bin/zsh5			x
+	/bin				x
 	/dev				h
 	/dev/null			rw
 	/dev/tty1           rw
@@ -69,19 +64,8 @@ subject /bin/zsh5 o {
 	/etc/shadow			h
 	/etc/shadow-			h
 	/etc/ssh			h
-	/etc/zsh			h
-	/etc/zsh/zlogin			r
-	/etc/zsh/zlogout		r
-	/etc/zsh/zprofile		r
-	/etc/zsh/zshenv			r
-	/etc/zsh/zshrc			r
 	/home				h
-	/home/hmuser			
-	/home/hmuser/.zcompdump		r
-	/home/hmuser/.zsh_history	rwcd
-	/home/hmuser/.zsh_history.LOCK	wcd
-	/home/hmuser/.zsh_history.new	rwcd
-	/home/hmuser/.zshrc		r
+	/home/hmuser	rwcd
 	/lib				rx
 	/lib/modules			h
 	/proc				r
@@ -96,11 +80,11 @@ subject /bin/zsh5 o {
 	/run/systemd/journal/dev-log	rw
 	/run/utmp			r
 	/usr				h
-	/usr/bin			x
+	/usr/bin			rx
 	/usr/lib			rx
 	/usr/local			h
-	/usr/local/bin			
-	/usr/local/share/zsh		
+	/usr/local/bin	rx		
+	/usr/local/share r	
 	/usr/share			r
 	-CAP_ALL
 	bind	disabled

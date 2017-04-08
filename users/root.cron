@@ -512,6 +512,7 @@ subject /usr/bin/php5 o {
     /etc/ssh            h
     /lib                rx
     /lib/modules            h
+    /tmp  rwcd
     /usr
     /usr/bin
     /usr/bin/php5           rx

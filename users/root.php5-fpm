@@ -2,7 +2,7 @@ subject /usr/sbin/php5-fpm o {
 user_transition_allow www-data
 group_transition_allow www-data
 
-	/				h
+	/				
 	/dev				h
 	/dev/null			rw
 	/dev/urandom			r
@@ -21,27 +21,36 @@ group_transition_allow www-data
 	/proc				h
 	/proc/sys/kernel/ngroups_max	r
 	/run				h
+	/run/php5-fpm.sock rwcd
+	/run/php5-fpm.pid rwcd
 	/run/nscd/socket		rw
-	/run/php/		wc
+	/run/php		wc
 	/run/systemd/notify		rw
 	/tmp				rwcd
-	/usr				h
+	/usr				
 	/usr/lib			rx
+	/usr/share/zoneinfo r
+	/usr/sbin		
+	/usr/sbin/php5-fpm x
 	/var				h
 	/var/log/php5-fpm.log		a
 	-CAP_ALL
 	+CAP_CHOWN
+	+CAP_KILL
 	+CAP_DAC_OVERRIDE
 	+CAP_SETGID
 	+CAP_SETUID
+	+CAP_SYS_RESOURCE
+	+CAP_SYS_NICE
 	bind	disabled
 	connect	disabled
 }
 
-subject /usr/sbin/php5query o {
-	/				h
+subject /usr/lib/php5/php5-fpm-checkconf o {
+	/				
 	/bin				h
 	/bin/dash			x
+	/bin/grep		x
 	/etc				h
 	/etc/ld.so.cache		r
 	/etc/ld.so.preload		r
@@ -51,10 +60,10 @@ subject /usr/sbin/php5query o {
 	/run				h
 	/run/systemd/journal/dev-log	rw
 	/usr				h
-	/usr/bin			rx
 	/usr/lib			h
-	/usr/lib/php		r		
-	/usr/sbin			r
+	/usr/lib/php5		r		
+	/usr/sbin			h
+	/usr/sbin/php5-fpm x
 	/usr/share			h
 	/usr/share/zoneinfo		r
 	-CAP_ALL

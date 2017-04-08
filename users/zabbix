@@ -1,5 +1,5 @@
 role zabbix u
-role_allow_ip   10.0.2.252/32
+$role_zabbix_server
 role_allow_ip   0.0.0.0/32
 subject /  {
     /               h
