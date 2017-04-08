@@ -45,7 +45,7 @@ define connect_nfs {
 
 #define role_ssh_client {
 #  role_allow_ip	10.0.2.251/32
-#  role_allow_ip 10.8.0.0/8
+#  role_allow_ip 10.8.0.0/16
 #}
 
 #define role_zabbix_server {
