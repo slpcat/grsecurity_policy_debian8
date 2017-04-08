@@ -5,11 +5,17 @@ subject /  {
     /               h
     /dev                h
     /dev/pts            
-    /etc                h
+    /etc           r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
-    /etc/locale.alias       r
-    /etc/localtime      r
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
     /lib                rx
     /lib/modules            h
     /run                h
@@ -42,16 +48,24 @@ subject /bin/dash o {
     bind    disabled
     connect disabled
 }
-subject /bin/wc o {
+subject /usr/bin/wc o {
     /               h
     /bin                x
-    /etc                h
+    /etc           r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
-    /etc/localtime          r
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
     /lib                rx
     /lib/modules            h
     /run                h
+    /run/utmp           r
     /run/systemd/journal/dev-log    rw
     /usr                h
     /usr/bin         x
@@ -63,16 +77,30 @@ subject /bin/wc o {
 }
 
 
-subject /bin/who o {
+subject /usr/bin/who o {
     /               h
     /bin                x
-    /etc                h
+    /dev/pts        r
+    /dev/tty0        r
+    /dev/tty1        r
+    /dev/tty2        r
+    /dev/tty3        r
+    /dev/tty4        r
+    /etc           r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
     /etc/ld.so.cache        r
     /etc/ld.so.preload      r
-    /etc/localtime          r
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
     /lib                rx
     /lib/modules            h
     /run                h
+    /run/utmp           r
     /run/systemd/journal/dev-log    rw
     /usr                h
     /usr/bin         x

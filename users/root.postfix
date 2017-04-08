@@ -158,7 +158,7 @@ subject /usr/sbin/postmulti o {
 	/usr/share/zoneinfo		r
 	-CAP_ALL
 	bind 0.0.0.0/32:0 dgram ip
-	$connect_nameservers
+	$connect_nameserver
 	sock_allow_family netlink
 }
 
