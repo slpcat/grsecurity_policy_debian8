@@ -5,7 +5,6 @@ subject /usr/lib/postfix/master o {
     /etc/ld.so.preload      r
     /etc/postfix            r
     /etc/resolv.conf        r
-    /etc/localtime	r
     /lib                rx
     /lib/modules            h
     /run                h

@@ -60,11 +60,11 @@ subject /usr/sbin/nginx o {
   /lib                rx
   /lib/modules            h
   /lib64/modules          h
+  /run/php5-fpm.sock			rw
 	/usr                h
   /usr/lib			rx
   /usr/sbin/nginx          x
   /usr/share/zoneinfo     r
-	/var/run	rw
 	/srv		r
 	/data		r
 	/var/log/nginx/access.log	a
@@ -76,6 +76,7 @@ subject /usr/sbin/nginx o {
 subject /usr/sbin/php5-fpm o {
 	/				
 	/boot				h
+	/build			h
 	/dev				h
 	/dev/urandom			r
 	/etc/grsec2			h
@@ -87,10 +88,13 @@ subject /usr/sbin/php5-fpm o {
 	/etc/shadow			h
 	/etc/shadow-			h
 	/etc/ssh			h
+	/home			h
 	/lib/modules			h
 	/lib64/modules			h
 	/proc				h
 	/proc/meminfo			r
+	/run/php5-fpm.sock			rw
+	/root			h
 	/data				r
 	/sys				h
 	/usr				h
@@ -121,6 +125,7 @@ subject /usr/sbin/apache2 o {
     /etc/shadow         h
     /etc/shadow-            h
     /etc/ssh            h
+    /home			h
     /lib/modules            h
     /lib64/modules          h
     /proc/bus           h
@@ -130,6 +135,7 @@ subject /usr/sbin/apache2 o {
     /proc/slabinfo          h
     /proc/sys           h
     /run/nscd/socket    rw
+    /root           h
     /sys                h
     /usr/lib            rx
     /usr/sbin/apache2       rx

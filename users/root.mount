@@ -122,4 +122,3 @@ subject /usr/sbin/rpc.idmapd o {
 	bind	disabled
 	connect	disabled
 }
-

@@ -302,7 +302,7 @@ group_transition_allow nogroup hmuser root
     /sys                h
     /usr                h
     /usr/bin            rx
-    /usr/lib/x86_64-linux-gnu rx
+    /usr/lib rx
     /usr/share/zoneinfo     r
     /var                h
     /var/log/lastlog        rw

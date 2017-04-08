@@ -130,6 +130,7 @@ subject /lib/systemd/systemd o {
     +CAP_WAKE_ALARM
     +CAP_DAC_READ_SEARCH
     +CAP_DAC_OVERRIDE
+    +CAP_SYS_TTY_CONFIG
     bind    disabled
     connect disabled
 }
