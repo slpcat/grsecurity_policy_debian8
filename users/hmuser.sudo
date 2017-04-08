@@ -4,10 +4,12 @@ group_transition_allow nogroup hmuser root
 
 	/				h
 	/bin				x	
-	/dev				h
-	/dev/console			
-	/dev/pts			
+	/dev							
 	/dev/tty			rw
+	/dev/grsec          h
+  /dev/kmem           h
+  /dev/mem            h
+  /dev/port           h
 	/etc				r
 	/etc/grsec2			h
 	/etc/gshadow			h
@@ -69,4 +71,48 @@ user_transition_allow root nobody
 	+CAP_SETUID
 	bind	disabled
 	connect	disabled
+}
+
+subject /sbin/pam-tmpdir-helper o {
+    /
+    /boot               h
+    /dev
+    /dev/grsec          h
+    /dev/kmem           h
+    /dev/mem            h
+    /dev/port           h
+    /etc      r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/ld.so.cache        r
+    /etc/ld.so.preload      r
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
+    /lib                rx
+    /lib/modules            h
+    /lib64/modules          h
+    /proc/bus           h
+    /proc/kallsyms          h
+    /proc/kcore         h
+    /proc/modules           h
+    /proc/slabinfo          h
+    /proc/sys           h
+    /run				h
+		/run/systemd/journal/dev-log	rw
+    /sbin               h
+    /sbin/pam-tmpdir-helper     x
+    /sys                h
+    /tmp                wc
+    /usr/src            h
+    /var/backups            h
+    /var/log            h
+    -CAP_ALL
+    +CAP_CHOWN
+    bind    disabled
+    connect disabled
 }

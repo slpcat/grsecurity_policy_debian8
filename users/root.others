@@ -119,14 +119,16 @@ subject /bin/kill o {
     bind    disabled
     connect disabled
 }
+
 subject /sbin/pam-tmpdir-helper o {
     /
     /boot               h
+    /dev
     /dev/grsec          h
     /dev/kmem           h
     /dev/mem            h
     /dev/port           h
-    /etc
+    /etc      r
     /etc/grsec2         h
     /etc/gshadow            h
     /etc/gshadow-           h
@@ -147,6 +149,8 @@ subject /sbin/pam-tmpdir-helper o {
     /proc/modules           h
     /proc/slabinfo          h
     /proc/sys           h
+    /run				h
+		/run/systemd/journal/dev-log	rw
     /sbin               h
     /sbin/pam-tmpdir-helper     x
     /sys                h
@@ -211,10 +215,14 @@ group_transition_allow nogroup root hmuser
 	/bin				h
 	/bin/zsh5			x
 	/boot				h
-	/dev				h
+	/dev
 	/dev/null			rw
-    /dev/tty1           rw
+  /dev/tty1           rw
 	/dev/pts			rw
+	/dev/grsec          h
+  /dev/kmem           h
+  /dev/mem            h
+  /dev/port           h
 	/etc				
 	/etc/grsec2			h
 	/etc/gshadow			h

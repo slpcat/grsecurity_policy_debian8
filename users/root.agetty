@@ -6,10 +6,16 @@ subject /sbin/agetty o {
     /dev/null           rw
     /dev/tty1           rw
     /dev/pts            rw
-    /etc                h
-    /etc/ld.so.cache        r
-    /etc/ld.so.preload      r
-    /etc/locale.alias       r
+    /etc                r
+    /etc/grsec2         h
+    /etc/gshadow            h
+    /etc/gshadow-           h
+    /etc/passwd         h
+    /etc/ppp            h
+    /etc/samba/smbpasswd        h
+    /etc/shadow         h
+    /etc/shadow-            h
+    /etc/ssh            h
     /lib                rx
     /lib/modules            h
     /proc               
