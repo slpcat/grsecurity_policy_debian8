@@ -108,13 +108,7 @@ subject /lib/systemd/systemd o {
     /lib                rx
     /lib/modules            h
     /lib64/modules          h
-    /proc               r
-    /proc/bus           h
-    /proc/kallsyms          h
-    /proc/kcore         h
-    /proc/modules           h
-    /proc/slabinfo          h
-    /proc/sys           h
+    /proc               rw
     /run                rw
     /sbin               rx
     /sys                rwcd
@@ -137,6 +131,8 @@ subject /lib/systemd/systemd o {
     +CAP_DAC_READ_SEARCH
     +CAP_DAC_OVERRIDE
     +CAP_SYS_TTY_CONFIG
+    +CAP_SETGID
+    +CAP_SETUID
     bind    disabled
     connect disabled
 }

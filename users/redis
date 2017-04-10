@@ -2,14 +2,72 @@ role redis u
 role_allow_ip	0.0.0.0/32
 subject /  {
 	/				h
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /lib/systemd/systemd o {
+	/				h
+	/run/systemd/journal/dev-log	rw
+	/usr/bin/redis-cli		x
+	/usr/bin/redis-server		x
+	/usr/share/zoneinfo		r
+	-CAP_ALL
+	bind	disabled
+	connect	disabled
+}
+
+subject /usr/bin/redis-cli o {
+	/				h
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/lib				rx
+	/lib/modules			h
+	/sys				h
+	/sys/devices/system/cpu/online	r
+	/usr				h
+	/usr/bin/redis-cli		x
+	/usr/lib/x86_64-linux-gnu	rx
+	-CAP_ALL
+	bind	disabled
+	connect 127.0.0.1/32:6379 stream tcp
+}
+
+subject /usr/bin/redis-server o {
+	/				h
+	/dev				h
+	/dev/null			rw
+	/dev/urandom			r
+	/etc				h
+	/etc/ld.so.cache		r
+	/etc/ld.so.preload		r
+	/etc/redis/redis.conf		r
+	/lib				rx
+	/lib/modules			h
+	/lib/x86_64-linux-gnu		rx
 	/proc				r
 	/proc/bus			h
 	/proc/kallsyms			h
 	/proc/kcore			h
 	/proc/modules			h
 	/proc/slabinfo			h
-	/proc/sys			h
+	/run				h
+	/run/redis/redis-server.pid	wcd
+	/sys				h
+	/sys/devices/system/cpu/online	r
+	/usr				h
+	/usr/bin/redis-server		x
+	/usr/lib/locale	r
+	/usr/lib/x86_64-linux-gnu	rx
+	/usr/share/zoneinfo		r
+	/var				h
+	/var/lib/redis			
+	/var/lib/redis/*.rdb		rwcd
+	/var/log/redis/redis-server.log	w
 	-CAP_ALL
-	bind	disabled
+	bind 10.0.2.137/32:6379 stream tcp
+	bind 127.0.0.1/32:6379 stream tcp
 	connect	disabled
 }
