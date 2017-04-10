@@ -14,7 +14,7 @@ group_transition_allow nogroup
     /etc/ld.so.preload      r
     /etc/openvpn            rw
     /etc/openvpn/ca.crt     r
-    /etc/openvpn/clients-conf   
+    /etc/openvpn/clients-conf     r   
     /etc/openvpn/dh2048.pem     r
     /etc/openvpn/openvpn-status.log w
     /etc/openvpn/openvpn.log    a

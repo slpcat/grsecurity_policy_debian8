@@ -7,6 +7,9 @@ subject /lib/systemd/systemd-journald o {
 		/etc/ld.so.cache		r
 		/etc/ld.so.preload		r
 		/etc/localtime  r
+		/lib                rx
+    /lib/modules            h
+    /lib64/modules          h
     /proc               r
     /proc/bus           h
     /proc/kallsyms          h
@@ -17,7 +20,10 @@ subject /lib/systemd/systemd-journald o {
     /run                rw
     /run/log/journal rwcd
     /usr                h
-    /usr/share/zoneinfo r
+    /usr/lib            rx
+    /usr/local
+    /usr/share/zoneinfo     r
+    /usr/src            h
     -CAP_ALL
     +CAP_SETGID
     +CAP_SETUID

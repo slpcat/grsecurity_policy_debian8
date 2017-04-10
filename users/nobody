@@ -43,7 +43,7 @@ subject /usr/sbin/openvpn o {
 	/etc/shadow         h
 	/etc/shadow-            h
 	/etc/ssh            h
-	/etc/openvpn	    rwc
+	/etc/openvpn/	    rwc
 	/run				h
 	/run/systemd/journal/dev-log	rw
 	/usr				h

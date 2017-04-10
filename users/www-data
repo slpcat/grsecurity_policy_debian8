@@ -1,5 +1,20 @@
 role www-data u
 role_allow_ip	0.0.0.0/32
+#web站点目录
+define www_dir {
+	/data/web   rw
+	/data/web/*.php	r
+	/data/log w
+	/srv				rcwd
+	/srv/*.php	r
+	/var/www            rw
+  /var/www/*.php    r
+}
+#web程序接口调用
+define connect_webapi {
+	connect 127.0.0.1/32:80 stream tcp
+}
+
 subject /  {
 	/				h
 	/etc/ld.so.cache		r
@@ -14,9 +29,7 @@ subject /etc/init.d o {
 	/etc/ld.so.cache		r
 	/lib/x86_64-linux-gnu	rxi
 	/run		rw
-	/srv		r
-	/data   r
-	/var/www            r
+  $www_dir
 	-CAP_ALL
 	bind 10.0.2.137/32:8055 stream tcp
 	connect 127.0.0.1/32:3306 stream tcp
@@ -34,8 +47,7 @@ subject /opt/phpbrew/php/php-5.3.29/sbin/php-fpm o {
   /etc/samba/smbpasswd        h
   /etc/shadow-            h
 	/etc/resolv.conf		r
-	/srv				rcwd
-	/srv/*.php	r
+	$www_dir
   /usr                h
 	-CAP_ALL
 	bind	disabled
@@ -65,8 +77,7 @@ subject /usr/sbin/nginx o {
   /usr/lib			rx
   /usr/sbin/nginx          x
   /usr/share/zoneinfo     r
-	/srv		r
-	/data		r
+	$www_dir
 	/var/log/nginx/access.log	a
 	/var/log/nginx/error.log	a
 	-CAP_ALL
@@ -95,7 +106,7 @@ subject /usr/sbin/php5-fpm o {
 	/proc/meminfo			r
 	/run/php5-fpm.sock			rw
 	/root			h
-	/data				r
+	$www_dir
 	/sys				h
 	/usr				h
 	/usr/share/zoneinfo		r
@@ -143,8 +154,7 @@ subject /usr/sbin/apache2 o {
     /var                
     /var/backups            h
     /var/log            h
-    /var/www            r
-    /var/www/*.php    r
+    $www_dir
     -CAP_ALL
     bind 10.0.2.137/32:80 stream tcp
     connect 127.0.0.1/32:3306 stream tcp
