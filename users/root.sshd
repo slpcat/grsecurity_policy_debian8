@@ -51,7 +51,8 @@ group_transition_allow root hmuser nogroup
     +CAP_AUDIT_WRITE
     +CAP_NET_BIND_SERVICE
     +CAP_KILL
-    bind 10.0.2.137/32:22 stream tcp
+    bind 0.0.0.0/32:22 stream tcp
+#    bind 10.0.2.137/32:22 stream tcp
     connect disabled
     sock_allow_family ipv6 netlink
 }

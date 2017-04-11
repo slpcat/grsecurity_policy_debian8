@@ -1,7 +1,8 @@
 role hmuser u
-role_allow_ip	10.0.2.251/32
-role_allow_ip 10.8.0.0/16
-role_allow_ip	0.0.0.0/32
+role_allow_ip 0.0.0.0/0
+#role_allow_ip	10.0.2.251/32
+#role_allow_ip 10.8.0.0/16
+#role_allow_ip	0.0.0.0/32
 subject /  {
 	/				
 	/bin				h
@@ -85,8 +86,8 @@ subject /bin/bash o {
 	/usr/bin/rsync			x
 	/usr/bin/tput			x
 	/usr/lib			h
-	/usr/lib/locale/locale-archive	r
-	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
+	/usr/lib/locale	r
+	/usr/lib/x86_64-linux-gnu	r
 	/usr/share			h
 	/usr/share/zoneinfo		r
 	-CAP_ALL
@@ -196,7 +197,8 @@ subject /usr/bin/rsync o {
 	/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache	r
 	-CAP_ALL
 	bind	disabled
-	connect 10.0.2.0/24:873 stream tcp
+	connect 0.0.0.0/0:873 stream tcp
+#	connect 10.0.2.0/24:873 stream tcp
 }
 
 subject /usr/bin/ssh o {
@@ -234,7 +236,8 @@ subject /usr/bin/ssh o {
 	/usr/lib/x86_64-linux-gnu	rx
 	-CAP_ALL
 	bind	disabled
-	connect 10.0.2.250/32:22 stream tcp
+	connect 0.0.0.0/0:22 stream tcp
+#	connect 10.0.2.250/32:22 stream tcp
 }
 
 subject /usr/lib/git-core/git o {

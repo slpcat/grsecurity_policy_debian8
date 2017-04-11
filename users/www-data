@@ -12,7 +12,12 @@ define www_dir {
 }
 #connect to webapi
 define connect_webapi {
-	connect 127.0.0.1/32:80 stream tcp
+	connect 0.0.0.0/0:80 stream tcp
+	connect 0.0.0.0/0:8080 stream tcp
+	connect 0.0.0.0/0:443 stream tcp
+#	connect 127.0.0.1/32:80 stream tcp
+#	connect 127.0.0.1/32:8080 stream tcp
+#	connect 127.0.0.1/32:443 stream tcp
 }
 
 subject /  {
@@ -31,7 +36,8 @@ subject /etc/init.d o {
 	/run		rw
   $www_dir
 	-CAP_ALL
-	bind 10.0.2.137/32:8055 stream tcp
+	bind 0.0.0.0/32:0 stream tcp
+#	bind 10.0.2.137/32:8055 stream tcp
 	connect 127.0.0.1/32:3306 stream tcp
   sock_allow_family ipv6
 }
@@ -81,7 +87,8 @@ subject /usr/sbin/nginx o {
 	/var/log/nginx/access.log	a
 	/var/log/nginx/error.log	a
 	-CAP_ALL
-	bind 10.0.2.137/32:8055 stream tcp
+	bind 0.0.0.0/32:80 stream tcp
+#	bind 10.0.2.137/32:8055 stream tcp
 	connect	disabled
 }
 subject /usr/sbin/php5-fpm o {
@@ -157,7 +164,8 @@ subject /usr/sbin/apache2 o {
     /var/log            h
     $www_dir
     -CAP_ALL
-    bind 10.0.2.137/32:80 stream tcp
+    bind 0.0.0.0/32:80 stream tcp
+#    bind 10.0.2.137/32:80 stream tcp
     connect 127.0.0.1/32:3306 stream tcp
     sock_allow_family ipv6
 }

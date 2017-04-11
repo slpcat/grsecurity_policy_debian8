@@ -233,7 +233,8 @@ subject /etc/init.d o {
     +CAP_SYS_NICE
     +CAP_SYS_RESOURCE
     +CAP_SYS_PACCT
-    bind 10.0.2.137/32:8055 stream tcp
+#    bind 10.0.2.137/32:8055 stream tcp
+    bind 0.0.0.0/32:0 stream tcp
     bind 127.0.0.1/32:25 stream tcp
     connect disabled
     sock_allow_family netlink

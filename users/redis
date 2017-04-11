@@ -67,7 +67,7 @@ subject /usr/bin/redis-server o {
 	/var/lib/redis/*.rdb		rwcd
 	/var/log/redis/redis-server.log	w
 	-CAP_ALL
-	bind 10.0.2.137/32:6379 stream tcp
+#	bind 10.0.2.137/32:6379 stream tcp
 	bind 127.0.0.1/32:6379 stream tcp
 	connect	disabled
 }

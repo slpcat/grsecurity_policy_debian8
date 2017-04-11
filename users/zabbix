@@ -1,6 +1,7 @@
 role zabbix u
-role_allow_ip	10.0.2.252/32
-role_allow_ip   0.0.0.0/32
+role_allow_ip   0.0.0.0/0
+#role_allow_ip	10.0.2.252/32
+#role_allow_ip   0.0.0.0/32
 subject /  {
     /               h
     /dev                h
@@ -141,6 +142,7 @@ subject /usr/sbin/zabbix_agentd o {
     /var                h
     /var/log/zabbix   ra
     -CAP_ALL
-    bind 10.0.2.137/32:10050 stream tcp
+    bind 0.0.0.0/32:10050 stream tcp
+#    bind 10.0.2.137/32:10050 stream tcp
     connect disabled
 }

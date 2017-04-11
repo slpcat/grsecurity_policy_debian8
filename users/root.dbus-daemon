@@ -26,8 +26,8 @@ group_transition_allow messagebus nogroup
 	/run/systemd/system		
 	/usr				h
 	/usr/bin/dbus-daemon		x
-	/usr/lib/x86_64-linux-gnu/libcap-ng.so.0.0.0	rx
-	/usr/share/dbus-1/system-services	r
+	/usr/lib/x86_64-linux-gnu	rx
+	/usr/share	r
 	-CAP_ALL
 	+CAP_SETGID
 	+CAP_SETUID

@@ -109,7 +109,8 @@ subject /usr/bin/debsecan o {
     -CAP_ALL
     bind 0.0.0.0/32:0 dgram ip
     $connect_nameserver
-    connect 128.31.0.67/32:443 stream tcp
+    connect 0.0.0.0/0:443 stream tcp
+#    connect 128.31.0.67/32:443 stream tcp
 }
 subject /usr/sbin/postdrop o {
     /               h
