@@ -19,7 +19,6 @@ group_transition_allow www-data
 	+CAP_SETGID
 	+CAP_SETUID
 	+CAP_SYS_CHROOT
-	bind 0.0.0.0/32:873 stream tcp
-#	bind 10.0.2.137/32:873 stream tcp
+	bind 10.0.2.137/32:873 stream tcp
 	connect	disabled
 }
